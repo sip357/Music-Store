@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: #000000;
   }
   
   header {
@@ -57,7 +58,7 @@ body {
   }
   
   .topnav a.active {
-    background-color: #04AA6D;
+    background-color: #293e36;
     color: white;
   }
   
@@ -87,9 +88,13 @@ body {
     }
   }
 
+  div{
+    color: #ddd;
+  }
+
   div h1{
     text-align:left;
-    font-family: fantasy;
+    font-family: 'Courier New', Courier, monospace;
     font-size: xx-large;
     font-weight: bold;
   }
