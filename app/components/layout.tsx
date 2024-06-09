@@ -11,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Head>
-          <title>SIP's Music Store</title>
+          <title>Music Store</title>
           <meta name="description" content="A website for selling instrumentals by SIP" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
