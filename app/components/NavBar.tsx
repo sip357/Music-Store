@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import styles from './styles/NavBar.module.css';
+import styles from '../styles/NavBar.module.css';
 
 const NavBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

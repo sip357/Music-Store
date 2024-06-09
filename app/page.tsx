@@ -1,4 +1,4 @@
-import Layout from "./layout";
+import Layout from "./components/layout";
 import App from "next/app";
 import './styles/globals.css';
 
