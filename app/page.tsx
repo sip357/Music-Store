@@ -1,6 +1,6 @@
 import Layout from "./layout";
 import App from "next/app";
-import './globals.css';
+import './styles/globals.css';
 
 export default function Home() {
   return (
