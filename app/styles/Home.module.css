@@ -4,3 +4,7 @@ div h1{
     font-style: oblique;
     font-weight: bold;
   }
+
+  div p{
+    font-family: sans-serif;
+  }
