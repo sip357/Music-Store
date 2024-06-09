@@ -86,3 +86,14 @@ body {
       text-align: left;
     }
   }
+
+  div h1{
+    text-align:left;
+    font-family: fantasy;
+    font-size: xx-large;
+    font-weight: bold;
+  }
+
+  div p{
+    font-family: sans-serif;
+  }

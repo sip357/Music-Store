@@ -1,11 +1,12 @@
 import Layout from "./layout";
 import App from "next/app";
+import './globals.css';
 
 export default function Home() {
   return (
     <div>
-      <h1>Welcome to my Music Store</h1>
-      <p>Discover a variety of beats at unbeatable prices</p>
+      <h1>Where instrumentals meet talent</h1>
+      <p>Discover your sound</p>
     </div>
   );
 }
