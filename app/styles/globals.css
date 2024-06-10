@@ -59,8 +59,9 @@ body {
     display: inline-block;
   }
   
-  .pic{
+  img{
     position: absolute;
     top: 100px;
     bottom: 100px;
+    border-radius: 8px;
   }
