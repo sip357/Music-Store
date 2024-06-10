@@ -7,7 +7,7 @@ export default function def() {
     <Layout>
       <div>
         <h1>Where instrumentals meet talent</h1>
-        <p>Discover your sound</p>
+        <p className="/">Discover your sound</p>
       </div>
     </Layout>
   );

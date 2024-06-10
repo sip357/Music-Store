@@ -6,5 +6,19 @@ div h1{
   }
 
   div p{
-    font-family: sans-serif;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  .container{
+    display: inline-block;
+  }
+
+  .text{
+    width: 100;
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
   }
