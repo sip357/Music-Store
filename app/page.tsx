@@ -9,6 +9,12 @@ export default function def() {
         <h1>Where instrumentals meet talent</h1>
         <p className="/">Discover your sound</p>
       </div>
+      <div className="container">
+        <a href="/">Instrumentals</a>
+        <a href="/">Sound kits</a>
+        <a href="/">Licence</a>
+        <img src="studio.jpg" alt="Instrumentals" width="90" height="90"></img>
+      </div>
     </Layout>
   );
 }

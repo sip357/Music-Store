@@ -43,7 +43,7 @@ body {
   }
 
   div h1{
-    text-align:left;
+    text-align:center;
     font-family: 'Courier New', Courier, monospace;
     font-size: xx-large;
     font-weight: bold;
@@ -51,17 +51,24 @@ body {
 
   div p{
     font-family: 'Courier New', Courier, monospace;
-    text-align: left;
+    text-align: center;
     position: relative;
   }
 
+  div a{
+    padding: 20px;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier;
+    font-size: small;
+  }
+
   .container{
-    display: inline-block;
+    display: flex;
+    justify-content: center;
   }
   
   img{
-    position: absolute;
-    top: 100px;
-    bottom: 100px;
-    border-radius: 8px;
+    border-radius: 50%;
   }
+
+  
