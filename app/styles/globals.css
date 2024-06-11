@@ -67,14 +67,45 @@ body {
     justify-content: center;
   }
   
-  img{
+  img {
     border-radius: 60%;
+    transition: all 0.3s ease;
   }
-
+  
   img:hover {
     box-shadow: 0 0 10px 1px rgba(3, 180, 239, 0.5);
     opacity: 0.8;
-    filter:blur(10px);
+    filter: blur(10px);
   }
+  
+  .image-container {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .hover-text {
+    visibility: hidden;
+    font-weight: bold;
+    width: 100px;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: visibility 0.3s, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 1;
+  }
+  
+  .image-container:hover .hover-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  
 
   
