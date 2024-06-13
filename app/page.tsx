@@ -10,7 +10,7 @@ export default function def() {
         <p className="/">Discover your sound</p>
       </div>
       <div className="container">
-        <a href="/" className="image-container">
+        <a href="store.html" className="image-container">
           <img src="studio.jpg" alt="Instrumentals" width="90" height="90"></img> 
           <div className="hover-text">Instrumentals</div>
         </a>
