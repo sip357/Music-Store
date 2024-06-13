@@ -25,6 +25,9 @@ footer {
   text-align: center;
   padding: 1rem;
   width: 100%;
+  left: 0;
+  bottom: 0;
+  position: fixed;
 }
 
 div {
@@ -99,7 +102,7 @@ img:hover {
   opacity: 1;
 }
 
-/* Media queries for responsiveness */
+/* Media queries for responsiveness*/
 @media (max-width: 1200px) {
   div h1 {
     font-size: 1.75rem;
