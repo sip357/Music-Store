@@ -67,7 +67,7 @@ img {
   height: auto;
 }
 
-img:hover {
+.image-container:hover img{
   box-shadow: 0 0 10px 1px rgba(3, 180, 239, 0.5);
   opacity: 0.8;
   filter: blur(10px);
