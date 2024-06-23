@@ -50,8 +50,27 @@ div p {
 div a {
   padding: 20px;
   margin-top: 20px;
-  font-family: 'Courier New', Courier;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 0.875rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.signUpbutton:hover container{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  background-color: blue;
+  flex-wrap: wrap;
+}
+
+ul{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: white;
+  flex-wrap: wrap;
+}
+
+button{
+  background-color: blue;
+  color: white;
 }
 
 .container {

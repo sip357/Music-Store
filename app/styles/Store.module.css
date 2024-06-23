@@ -18,3 +18,11 @@ img {
     padding: 1rem;
     margin: auto;
   }
+
+  .genreLinks{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 0.775rem;
+    color: white;
+    border-color: white;
+    border-width: 50%;
+  }
