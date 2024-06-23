@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="./pages/store.html">Shop</Link>
+          <Link href="/store">Shop</Link>
         </li>
         <li>
           <Link href="/about">About</Link>
@@ -34,7 +34,9 @@ const NavBar: React.FC = () => {
           <Link href="/contact">Contact</Link>
         </li>
         <li>
-          <Link href="/"><button className="button-3" role="button">Button 3</button></Link>
+          <Link href="/">
+            <button className={styles['button-3']} role="button">Sign Up</button> {/* Apply button-3 class */}
+          </Link>
         </li>
       </ul>
     </nav>

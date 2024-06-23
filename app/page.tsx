@@ -10,15 +10,19 @@ export default function def() {
         <p>Discover your sounds</p>
       </div>
       <div className="container">
-        <a href="store.html" className="image-container">
-          <img src="studio.jpg" alt="Instrumentals" width="90" height="90"></img> 
-          <div className="hover-text">Instrumentals</div>
-        </a>
-        <a href="/">Sound kits</a>
-        <a href="/">Licence</a>
+        <p className="paraFonts">
+          Hi, welcome to my beatstore. I am a Canadian producer that goes by the name, SIP. 
+          I love creating melodies and turning them into full instrumentals. 
+          My musical pallette is quite broad, ranging from Emo Rap all the way to Pop Punk music.
+          I fair detail, I specialize in and love to create Pop Punk, Punk Rock, Melodic Trap, LoFi, Alternative Rock and Pop instrumentals.
+          I also love to share my melodies, hence I create Sound Kits which will have a bunch of melodies or one-shots using a variety of instruments.
+        </p>
       </div>
-      <div className="container">
-        <a href="/" className="signUpbutton">Sign up</a>
+      <div>
+        <header>Licences</header>
+        <p className="paraFonts">
+          Here are the specific details about the Licence options.
+        </p>
       </div>
     </Layout>
   );
