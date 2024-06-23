@@ -18,10 +18,23 @@ export default function def() {
           I also love to share my melodies, hence I create Sound Kits which will have a bunch of melodies or one-shots using a variety of instruments.
         </p>
       </div>
-      <div>
+      <div className="container">
         <header>Licences</header>
+      </div>
+      <div>
+        <div className="paraFonts">
+        <p className="subject">
+          First Form Lease:
+        </p>
+          <p className="paraFonts">
+            1st form lease.
+          </p>
+        </div>
+      </div>
+      <div>
+        <p className="subject">Second Form Lease:</p>
         <p className="paraFonts">
-          Here are the specific details about the Licence options.
+          2nd form lease.
         </p>
       </div>
     </Layout>

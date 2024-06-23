@@ -15,8 +15,11 @@ nav a {
   font-size: 1rem;
 }
 
-main {
-  padding: 2rem;
+header{
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+  padding: 0;
 }
 
 /* Responsive footer */
@@ -43,17 +46,12 @@ div h1 {
 }
 
 div p {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
   position: relative;
 }
 
 div a {
-  padding: 20px;
-  margin-top: 20px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 0.875rem;
-  color: #ffffff;
   text-decoration: none;
 }
 
@@ -63,9 +61,18 @@ div a {
   padding: 5rem;
 }
 
+/*Paragraph font*/
 .paraFonts{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
+
+/* Mini titles*/
+.subject{
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
 
 /* Media queries for responsiveness*/
 @media (max-width: 1200px) {
