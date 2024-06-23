@@ -4,6 +4,7 @@ body {
   padding: 0;
   background: #000000;
   overflow-x: hidden;
+  padding-top: 6rem;
 }
 
 /* Responsive navigation */
@@ -12,10 +13,6 @@ nav a {
   margin: 0 1rem;
   text-decoration: none;
   font-size: 1rem;
-}
-
-Head{
-  position: fixed;
 }
 
 main {
