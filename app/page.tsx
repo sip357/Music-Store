@@ -7,7 +7,7 @@ export default function def() {
     <Layout>
       <div>
         <h1>Where instrumentals meet talent</h1>
-        <p className="/">Discover your sound</p>
+        <p>Discover your sounds</p>
       </div>
       <div className="container">
         <a href="store.html" className="image-container">

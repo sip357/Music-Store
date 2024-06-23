@@ -33,6 +33,9 @@ const NavBar: React.FC = () => {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
+        <li>
+          <Link href="/"><button className="button-3" role="button">Button 3</button></Link>
+        </li>
       </ul>
     </nav>
   );
