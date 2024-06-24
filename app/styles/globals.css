@@ -34,6 +34,10 @@ footer {
   position: relative;
 }
 
+.about-section {
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+
 div {
   color: #ddd;
 }
@@ -58,7 +62,6 @@ div a {
 .container {
   display: flex;
   justify-content: center;
-  padding: 5rem;
 }
 
 /*Paragraph font*/
@@ -73,6 +76,27 @@ div a {
   text-align: center;
 }
 
+.zerorem{
+  padding: 0;
+}
+
+.onerem{
+  padding: 2rem;
+}
+
+.onerembottom{
+  padding-bottom: 5rem;
+}
+
+.fiverem{
+  padding: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
 
 /* Media queries for responsiveness*/
 @media (max-width: 1200px) {
@@ -147,4 +171,11 @@ div a {
   div a {
     font-size: 0.5rem;
   }
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }

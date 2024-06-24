@@ -25,10 +25,10 @@ const NavBar: React.FC = () => {
           <Link href="/">Home</Link>
         </li>
         <li>
-          <Link href="/store">Shop</Link>
+          <Link href="/store" scroll={false}>Shop</Link>
         </li>
         <li>
-          <Link href="/about">About</Link>
+          <Link href="#about" scroll={false}>About</Link>
         </li>
         <li>
           <Link href="/contact">Contact</Link>
