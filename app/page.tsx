@@ -41,7 +41,6 @@ export default function def() {
           </p>
         </div>
       </section>
-      
     </Layout>
   );
 }

@@ -1,13 +1,14 @@
-import Layout from '../components/layout';
-import styles from '../styles/Home.module.css';
+import React from 'react';
+import TextBox from './TextBox';
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <Layout>
-      <div className={styles.container}>
-        <h1>Where instrumentals meet talent</h1>
-        <p>Discover your sound</p>
-      </div>
-    </Layout>
+    <div>
+      <h1>Welcome to my Music Store</h1>
+      <p>Discover a variety of beats at unbeatable prices</p>
+      <TextBox />
+    </div>
   );
-}
+};
+
+export default Home;

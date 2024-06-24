@@ -1,3 +1,4 @@
+import TextBox from "../pages/TextBox"
 import NavBar from "./NavBar"
 import Head from "next/head"
 
