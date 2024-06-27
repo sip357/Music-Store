@@ -76,20 +76,64 @@ div a {
   text-align: center;
 }
 
-.zerorem{
+.onepi{
+  padding: 1rem !important;
+}
+
+.twopi{
+  padding: 2rem !important;
+}
+
+.threepi{
+  padding: 3rem !important;
+}
+
+.fourpi{
+  padding: 4rem !important;
+}
+
+.zerop{
   padding: 0;
 }
 
-.onerem{
+.onep{
+  padding: 1rem;
+}
+
+.twop{
   padding: 2rem;
 }
 
-.onerembottom{
-  padding-bottom: 5rem;
+.threep{
+  padding: 2rem;
 }
 
-.fiverem{
+.fourp{
+  padding: 4rem;
+}
+
+.fivep{
   padding: 5rem;
+}
+
+.onepb{
+  padding-bottom: 1rem;
+}
+
+.twopb{
+  padding-bottom: 2rem;
+}
+
+.threepb{
+  padding-bottom: 3rem;
+}
+
+.fourpb{
+  padding-bottom: 4rem;
+}
+
+.fivepb{
+  padding-bottom: 5rem;
 }
 
 @media (prefers-reduced-motion: no-preference) {

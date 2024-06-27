@@ -22,13 +22,19 @@ const NavBar: React.FC = () => {
       </div>
       <ul className={styles.navLinks}>
         <li>
-          <Link href="/">Home</Link>
+          <Link href='/'>Home</Link>
         </li>
         <li>
-          <Link href="/store" scroll={false}>Shop</Link>
+          <Link href="./store" scroll={false}>Shop</Link>
         </li>
         <li>
-          <Link href="#about" scroll={false}>About</Link>
+          <Link href="#about" scroll={true} className={styles.dropdown}>
+            About
+            <div className={styles.dropdown_content}>
+              <a href="/">Instrumentals</a>
+              <a href="/">Soundkits</a>
+            </div>
+          </Link>
         </li>
         <li>
           <Link href="/contact">Contact</Link>

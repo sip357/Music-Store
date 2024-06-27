@@ -1,5 +1,4 @@
 import Layout from "./components/layout";
-import App from "next/app";
 import './styles/globals.css';
 
 export default function def() {
@@ -9,8 +8,8 @@ export default function def() {
         <h1>Where instrumentals meet talent</h1>
         <p>Discover your sounds</p>
       </div>
-      <section className="about-section" id="about">
-        <div className="container onerem">
+      <section className="about-section">
+        <div className="container fivep" id="about">
           <p className="paraFonts">
             Hi, welcome to my beatstore. I am a Canadian producer that goes by the name, SIP. 
             I love creating melodies and turning them into full instrumentals. 
@@ -19,10 +18,10 @@ export default function def() {
             I also love to share my melodies, hence I create Sound Kits which will have a bunch of melodies or one-shots using a variety of instruments.
           </p>
         </div>
-        <div className="container onerem">
-          <header>Licences</header>
+        <div className="container onep">
+          <header>Instrumentals</header>
         </div>
-        <div className="onerem">
+        <div className="onep">
           <div className="paraFonts">
             <p className="subject">
               First Form Lease:
@@ -32,11 +31,11 @@ export default function def() {
             </p>
           </div>
         </div>
-        <div className="onerembottom">
+        <div className="onepb">
           <p className="subject">
             Second Form Lease:
           </p>
-          <p className="paraFonts zerorem">
+          <p className="paraFonts zerop">
             2nd form lease.
           </p>
         </div>
