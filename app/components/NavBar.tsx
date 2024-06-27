@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
           <Link href='/'>Home</Link>
         </li>
         <li>
-          <Link href="/store">Shop</Link>
+          <Link href="./store">Shop</Link>
         </li>
         <li>
           <Link href="#about" scroll={true} className={styles.dropdown}>
@@ -35,9 +35,6 @@ const NavBar: React.FC = () => {
               <a href="/">Soundkits</a>
             </div>
           </Link>
-        </li>
-        <li>
-          <Link href="/contact">Contact</Link>
         </li>
         <li>
           <Link href="/">
