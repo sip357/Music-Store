@@ -7,8 +7,8 @@ const Store: React.FC = () => {
     <Layout>
       <section className={styles.body}>
         <div className={`${styles.fourpi} ${styles.container}`}>
-        <span className={styles.onep}><button className={styles.button_27} role="button">Instrumentals</button></span>
-        <span className={styles.onep}><button className={styles.button_27} role="button">Soundkits</button></span>
+        <span className={styles.onep}><button className={styles.button_34} role="button">Instrumentals</button></span>
+        <span className={styles.onep}><button className={styles.button_34} role="button">Soundkits</button></span>
       </div>
       <div className={`${styles.div} ${styles.container} ${styles.fourpi}`}>
         <p className={styles.divP}>Browse through our selection of beats and sound kits.</p>
