@@ -31,12 +31,12 @@
   border-radius: 10px;
 }
 
-.productImage .gg_play_button_o{
+.productImage .gg_play_button{
   opacity: 0;
   transition: 0.3s with ease;
 }
 
-.productImage:hover .gg_play_button_o{
+.productImage:hover .gg_play_button{
   opacity : 1;
 }
 
@@ -56,10 +56,10 @@
 }
 
 /* Responsive navigation */
-nav .a {
+.a {
   color: white;
   margin: 0 1rem;
-  text-decoration: none;
+  text-decoration:none;
   font-size: 1rem;
   width: 100%;
 }
@@ -131,19 +131,17 @@ nav .a {
   text-decoration: none;
 }
 
-.gg_play_button_o {
+.gg_play_button {
   box-sizing: border-box;
   position: relative;
   display: block;
   transform: scale(var(--ggs,1));
   width: 22px;
   height: 22px;
-  border: 2px solid;
-  border-radius: 20px;
   color: white;
  }
  
- .gg_play_button_o::before {
+ .gg-play-button::before {
   content: "";
   display: block;
   box-sizing: border-box;
@@ -153,10 +151,9 @@ nav .a {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-left: 6px solid;
-  top: 4px;
-  left: 7px
- }
-
+  top: 6px;
+  left: 9px
+ } 
 /* Paragraph font */
 .paraFonts {
   font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";

@@ -16,8 +16,7 @@ const Store: React.FC = () => {
       <div className={styles.productsContainer}>
         <div className={styles.product}>
           <img src="studio.jpg" alt="picture" className={styles.productImage}/>
-          <p className={styles.productName}>Beat 1</p>
-          <div className={styles.gg_play_button_o}></div>
+          <a href="/" className={`${styles.productName} ${styles.a}`}>Beat 1</a>
         </div>
       </div>
       </section>
