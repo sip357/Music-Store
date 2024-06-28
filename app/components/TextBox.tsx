@@ -18,17 +18,21 @@ const TextBox: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
-      <div className={styles.text_align_center}>Subscribe to receive updates!</div>
-      <div className={styles.text_align_center}>
-        <label htmlFor="textInput"></label>
-        <input
-          type="text"
-          id="textInput"
-          value={inputValue}
-          onChange={handleChange}
-          className={styles.inputField}
-        />
+      <div className={`${styles.text_align_center} ${styles.zerop}`}>Subscribe to receive updates!</div>
+      <div className={styles.onepi}> 
+        <div className={styles.text_align_center}>
+          <label htmlFor="textInput"></label>
+          <input
+            type="email"
+            id="textInput"
+            value={inputValue}
+            onChange={handleChange}
+            className={styles.inputField}
+            placeholder='Enter email'
+          />
+        </div>
       </div>
+      
       <button type="submit" className={styles.submitButton}>Submit</button>
     </form>
   );

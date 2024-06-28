@@ -1,4 +1,5 @@
 import Layout from "./components/layout";
+import TextBox from "./components/TextBox";
 import './styles/globals.css';
 
 export default function def() {
@@ -41,6 +42,7 @@ export default function def() {
           </p>
         </div>
       </section>
+      <TextBox />
     </Layout>
   );
 }

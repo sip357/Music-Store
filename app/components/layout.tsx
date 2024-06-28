@@ -1,4 +1,3 @@
-import TextBox from "./TextBox"
 import NavBar from "./NavBar"
 import Head from "next/head"
 
@@ -17,7 +16,6 @@ export default function RootLayout({
         </Head>
         <NavBar />
         <main>{children}</main>
-        <TextBox />
         <footer>
           <p>&copy; 2023 SIP</p>
         </footer>
