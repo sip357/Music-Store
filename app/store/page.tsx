@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from "../components/layout";
 import styles from '../styles/Store.module.css';
-import Link from 'next/link';
 
 const Store: React.FC = () => {
   return (
