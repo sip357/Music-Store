@@ -9,9 +9,9 @@ const Store: React.FC = () => {
         <h1 className={styles.divH1}>Welcome to the Store</h1>
         <p className={styles.divP}>Browse through our selection of beats and sound kits.</p>
       </div>
-      <div>
+      <div className={styles.onepi}>
         <button className={styles.button_27} role="button">Instrumentals</button>
-        <button className={styles.button_27} role="button">Soundkits</button>
+        <div className={styles.onepi}><button className={styles.button_27} role="button">Soundkits</button></div>
       </div>
       <div className={styles.productsContainer}>
         <div className={styles.product}>
