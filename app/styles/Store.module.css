@@ -29,6 +29,7 @@
 .productName {
   margin-top: 10px;
   font-weight: bold;
+  color: white;
   font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
 .body {
