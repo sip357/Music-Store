@@ -11,19 +11,33 @@
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 20px;
+  width: auto;
 }
 
 .product {
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   width: 200px;
 }
 
+.product:hover{
+  background-color: #1d1d1d;
+}
+
 .productImage {
   max-width: 80%;
   border-radius: 10px;
+}
+
+.productImage .gg_play_button_o{
+  opacity: 0;
+  transition: 0.3s with ease;
+}
+
+.productImage:hover .gg_play_button_o{
+  opacity : 1;
 }
 
 .productName {
@@ -116,6 +130,32 @@ nav .a {
 .divA {
   text-decoration: none;
 }
+
+.gg_play_button_o {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  transform: scale(var(--ggs,1));
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  border-radius: 20px;
+  color: white;
+ }
+ 
+ .gg_play_button_o::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  width: 0;
+  height: 10px;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid;
+  top: 4px;
+  left: 7px
+ }
 
 /* Paragraph font */
 .paraFonts {
