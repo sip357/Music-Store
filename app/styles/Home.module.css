@@ -1,24 +1,218 @@
-div h1{
-    text-align:left;
-    font-size: large;
-    font-style: oblique;
-    font-weight: bold;
-  }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #000000;
+  overflow-x: hidden;
+  padding-top: 6rem;
+}
 
-  div p{
-    font-family: 'Courier New', Courier, monospace;
+/* Responsive navigation */
+nav a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+header{
+  font-size: xx-large;
+  font-weight: bolder;
+  text-align: center;
+  padding: 0;
+}
+
+/* Responsive footer */
+footer {
+  background: #1d1d1d;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  position: relative;
+}
+
+.about-section {
+  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+div {
+  color: #ddd;
+}
+
+div h1 {
+  text-align: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+div p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  position: relative;
+}
+
+div a {
+  text-decoration: none;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+/*Paragraph font*/
+.paraFonts{
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* Mini titles*/
+.subject{
+  font-size: large;
+  font-weight: bold;
+  text-align: center;
+}
+
+.onepi{
+  padding: 1rem !important;
+}
+
+.twopi{
+  padding: 2rem !important;
+}
+
+.threepi{
+  padding: 3rem !important;
+}
+
+.fourpi{
+  padding: 4rem !important;
+}
+
+.zerop{
+  padding: 0;
+}
+
+.onep{
+  padding: 1rem;
+}
+
+.twop{
+  padding: 2rem;
+}
+
+.threep{
+  padding: 2rem;
+}
+
+.fourp{
+  padding: 4rem;
+}
+
+.fivep{
+  padding: 5rem;
+}
+
+.onepb{
+  padding-bottom: 1rem;
+}
+
+.twopb{
+  padding-bottom: 2rem;
+}
+
+.threepb{
+  padding-bottom: 3rem;
+}
+
+.fourpb{
+  padding-bottom: 4rem;
+}
+
+.fivepb{
+  padding-bottom: 5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Media queries for responsiveness*/
+@media (max-width: 1200px) {
+  div h1 {
+    font-size: 1.75rem;
+  }
+  
+  div a {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 992px) {
+  main {
+    padding: 1.5rem;
   }
 
   .container{
-    display: inline-block;
+    padding: 4rem;
+  }
+  
+  div h1 {
+    font-size: 1.5rem;
+  }
+  
+  div a {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  main {
+    padding: 1rem;
   }
 
-  .text{
-    width: 100;
-    white-space: nowrap;
-    margin: 0 auto;
-    letter-spacing: .15em;
-    animation: 
-      typing 3.5s steps(40, end),
-      blink-caret .75s step-end infinite;
+  .container{
+    padding: 2.5rem;
   }
+  
+  nav a {
+    font-size: 0.875rem;
+    margin: 0 0.5rem;
+  }
+  
+  div h1 {
+    font-size: 1.25rem;
+  }
+  
+  div a {
+    font-size: 0.625rem;
+  }
+}
+
+@media (max-width: 576px) {
+  main {
+    padding: 0.5rem;
+  }
+
+  .container{
+    padding: 1rem;
+  }
+  
+  nav a {
+    font-size: 0.75rem;
+    margin: 0 0.25rem;
+  }
+  
+  div h1 {
+    font-size: 1rem;
+  }
+  
+  div a {
+    font-size: 0.5rem;
+  }
+}

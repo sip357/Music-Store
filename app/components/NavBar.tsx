@@ -25,7 +25,7 @@ const NavBar: React.FC = () => {
           <Link href='/'>Home</Link>
         </li>
         <li>
-          <Link href="/" prefetch={false}>Shop</Link>
+          <Link href="/store" prefetch={false}>Shop</Link>
         </li>
         <li>
           <Link href="#about" scroll={true} className={styles.dropdown}>
@@ -38,7 +38,7 @@ const NavBar: React.FC = () => {
         </li>
         <li>
           <Link href="/">
-            <button className={styles['button-3']} role="button">Sign Up</button> {/* Apply button-3 class */}
+            <button className={styles['button-3']} role="button">Sign Up</button>
           </Link>
         </li>
       </ul>
