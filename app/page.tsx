@@ -7,6 +7,7 @@ export default function def() {
       <div>
         <h1>Where instrumentals meet talent</h1>
         <p>Discover your sounds</p>
+        <p>Browse through our selection of beats and sound kits.</p>
       </div>
       <section className="about-section">
         <div className="container fivep" id="about">
