@@ -1,10 +1,10 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
+// ShoppingCartIcon.js
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
-function myComponent() {
-    <div>
-        <FontAwesomeIcon icon={faShoppingBag} />
-    </div>
-}
+const ShoppingCartIcon = () => {
+    return <FontAwesomeIcon icon={faShoppingCart} />;
+};
 
-export default myComponent;
+export default ShoppingCartIcon;
