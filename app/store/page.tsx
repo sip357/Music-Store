@@ -18,7 +18,9 @@ const Store: React.FC = () => {
           <div className={styles.product}>
             <img src="studio.jpg" alt="picture" className={styles.productImage}/>
             <a href="/" className={`${styles.productName} ${styles.a}`}>Beat 1</a>
-            <ShoppingCartIcon />
+            <div className={styles.iconContainer}>
+              <i className={styles.spc}><ShoppingCartIcon /></i>
+            </div>
           </div>
         </div>
       </section>
