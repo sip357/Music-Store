@@ -1,16 +1,17 @@
 import React from "react";
 import Layout from "../components/layout";
 import styles from '../styles/Signup.module.css';
+import ShoppingCartIcon from "../components/shopping_cart";
 
-const Store: React.FC = () => {
+const SignUp: React.FC = () => {
     return (
       <Layout>
         <div>
-            <p>Sign up</p>
+          p
         </div>
       </Layout>
     );
   };
   
-  export default Store;
+  export default SignUp;
   
