@@ -8,6 +8,7 @@ const SignUp: React.FC = () => {
       <Layout>
         <div className={styles.fivep}>
           <div className={styles.gg_play_button}></div>
+          <ShoppingCartIcon />
         </div>
       </Layout>
     );

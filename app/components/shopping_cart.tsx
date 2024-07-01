@@ -1,10 +1,11 @@
 // ShoppingCartIcon.js
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import styles from "../styles/shopCarticon.module.css";
 
 const ShoppingCartIcon = () => {
-    return <FontAwesomeIcon icon={faShoppingCart} size="1x" />;
+    return(
+        <div className={`${styles.icon_plus} ${styles.icon}`}></div>
+    )
 };
 
 export default ShoppingCartIcon;
