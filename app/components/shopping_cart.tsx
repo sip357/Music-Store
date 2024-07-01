@@ -4,7 +4,7 @@ import styles from "../styles/shopCarticon.module.css";
 
 const ShoppingCartIcon = () => {
     return(
-        <div className={`${styles.icon_plus} ${styles.icon}`}></div>
+        <img src="cart.png" alt="add" className={styles.cart} />
     )
 };
 

@@ -1,29 +1,5 @@
 /* set the size and position of the icon */
-.icon_plus {
-  position: relative;
-  top:50%;
-  left:50%;
-  width: 20vmin;
-  height: 20vmin;
-  transform: translate(-50%, -50%);
-}
-/* vertical line */
-.icon_plus:before {
-  content:"";
-  position: absolute;
-  top: 0;
-  left: 37.5%;
-  width: 25%;
-  height: 100%;
-  background-color: #000;
-}
-/* horizontal line */
-.icon_plus:after {
-  content:"";
-  position: absolute;
-  top:37.5%;
-  left: 0;
-  width: 100%;
-  height: 25%;
-  background-color: #000;
+.cart {
+  width: 15%;
+  height: 15%;
 }
