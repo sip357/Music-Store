@@ -26,14 +26,13 @@
   background-color: #1d1d1d;
 }
 
+.product:hover .iconContainer{
+  background-color: #1d1d1d;
+}
+
 .productImage {
   max-width: 80%;
   border-radius: 10px;
-}
-
-.productImage .gg_play_button{
-  opacity: 0;
-  transition: 0.3s with ease;
 }
 
 .productImage:hover .gg_play_button{
@@ -46,6 +45,11 @@
   color: white;
   font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
 }
+
+.productName:hover{
+  text-decoration: underline;
+}
+
 .body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -141,7 +145,7 @@
   color: black;
  }
  
- .gg-play-button::before {
+ .gg_play_button::before {
   content: "";
   display: block;
   box-sizing: border-box;
@@ -155,26 +159,32 @@
   left: 9px
  } 
 
- .iconContainer{
-  padding: 1rem;
+ .iconContainer {
+  padding: 0.5rem;
   display: flex;
+  justify-content: space-between; /* This will space out the children */
+  align-items: center; /* This will vertically center the children */
   background-color: black;
   width: auto;
 }
 
-.spc{
-  padding: 10px;
+.spc {
+  padding: 5px;
   background-color: white;
   border-radius: 10px;
   color: rgb(41, 0, 32);
-  text-align: right;
+  /* Optional: Ensures it sticks to the right side if there's more space */
+  flex-shrink: 0;
 }
 
-.playB{
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
+.playB {
+  padding: 5px;
+  background-color: white;
+  border-radius: 10px;
+  /* Optional: Ensures it sticks to the left side if there's more space */
+  flex-shrink: 0;
 }
+
 
 /* Paragraph font */
 .paraFonts {

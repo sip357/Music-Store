@@ -19,12 +19,11 @@ const Store: React.FC = () => {
             <img src="studio.jpg" alt="picture" className={styles.productImage}/>
             <a href="/" className={`${styles.productName} ${styles.a}`}>Beat 1</a>
             <div className={styles.iconContainer}>
-              <span className={styles.spc}>
-                <ShoppingCartIcon />
-              </span>
               <span className={styles.playB}>
                 <span className={styles.gg_play_button}></span>
-                <span>PlayButton</span>
+              </span>
+              <span className={styles.spc}>
+                <ShoppingCartIcon />
               </span>
             </div>
           </div>
