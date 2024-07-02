@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from "../components/layout";
-import styles from '../styles/Store.module.css';
+import styles from "./Store.module.css";
 import ShoppingCartIcon from '../components/shopping_cart';
 
 const Store: React.FC = () => {
