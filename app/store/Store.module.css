@@ -169,10 +169,10 @@
 }
 
 .spc {
-  padding: 5px;
+  padding: 2px;
   background-color: white;
   border-radius: 10px;
-  color: rgb(41, 0, 32);
+  color: #290020;
   right: 0;
   /* Optional: Ensures it sticks to the right side if there's more space */
   /*flex-shrink: 0;*/
