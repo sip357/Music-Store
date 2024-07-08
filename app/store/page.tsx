@@ -2,16 +2,17 @@ import React from 'react';
 import Layout from "../components/layout";
 import styles from "./Store.module.css";
 import ShoppingCartIcon from '../components/shopping_cart';
+//import "../styles/globals.css";
 
 const Store: React.FC = () => {
   return (
     <Layout>
-      <section className={`${styles.body} ${styles.fourpi}`}>
-        <div className={`${styles.fourpi} ${styles.container}`}>
+      <section className={styles.fourp}>
+        <div className={`${styles.fourpb} ${styles.mainContainer}`}>
           <span className={styles.onep}><button className={styles.button_34} role="button">Instrumentals</button></span>
           <span className={styles.onep}><button className={styles.button_34} role="button">Soundkits</button></span>
         </div>
-        <div className={`${styles.div} ${styles.container} ${styles.fourpi}`}>
+        <div className={`${styles.div} ${styles.mainContainer} ${styles.fourp}`}>
           <p className={styles.divP}>Browse through our selection of beats and sound kits.</p>
         </div>
         <div className={styles.productsContainer}>
