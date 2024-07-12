@@ -4,6 +4,20 @@
   margin: 20px;
 }
 
+.secondNavContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.prodTypes{
+  margin: 20px;
+  color: #FFFFFF;
+  background-color: #000;
+  font-size: medium;
+}
+
+
 /* Products section styles */
 .productsContainer {
   display: flex;
@@ -177,15 +191,14 @@
   /* Optional: Ensures it sticks to the right side if there's more space */
   /*flex-shrink: 0;*/
 }
-
+/*Play button structure*/
 .playB {
   padding: 5px;
   background-color: white;
   border-radius: 10px;
-  /* Optional: Ensures it sticks to the left side if there's more space */
+  /*Ensures it sticks to the left side if there's more space */
   flex-shrink: 0;
 }
-
 
 /* Paragraph font */
 .paraFonts {
@@ -257,86 +270,4 @@
 
 .fivepb {
   padding-bottom: 5rem;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: smooth;
-  }
-}
-
-/* Media queries for responsiveness */
-@media (max-width: 1200px) {
-  .divH1 {
-    font-size: 1.75rem;
-  }
-
-  .divA {
-    font-size: 0.875rem;
-  }
-}
-
-@media (max-width: 992px) {
-  .main {
-    padding: 1.5rem;
-  }
-
-  .mainContainer {
-    padding: 4rem;
-  }
-
-  .divH1 {
-    font-size: 1.5rem;
-  }
-
-  .divA {
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .main {
-    padding: 1rem;
-  }
-
-  .mainContainer {
-    padding: 1rem;
-  }
-
-  nav .a {
-    font-size: 0.875rem;
-    margin: 0 0.5rem;
-  }
-
-  .divH1 {
-    font-size: 1.25rem;
-  }
-
-  .divA {
-    font-size: 0.625rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .main {
-    padding: 0.5rem;
-  }
-
-  .mainContainer {
-    padding: 1rem;
-    display: block;
-  }
-
-  nav .a {
-    font-size: 0.75rem;
-    margin: 0 0.25rem;
-  }
-
-  .divH1 {
-    font-size: 1rem;
-  }
-
-  .divA {
-    font-size: 0.5rem;
-  }
 }
