@@ -9,7 +9,7 @@ const SignUp: React.FC = () => {
         <div className={styles.div}>
           <form action="">
             <div className={`${styles.twopb}`}>
-              <input type="text" placeholder="First Name" className={`${styles.inputField}`}/>
+              <input type="text" placeholder="Enter a name" className={`${styles.inputField}`}/>
             </div>
             <button className={`${styles.button_3}`}>Submit</button>
           </form>
