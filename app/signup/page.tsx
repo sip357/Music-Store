@@ -6,12 +6,14 @@ import "../styles/globals.css";
 const SignUp: React.FC = () => {
     return (
       <Layout>
-        <div className={styles.div}>
+        <div className={`${styles.div} ${styles.mg_auto}`}>
           <form action="">
             <div className={`${styles.twopb}`}>
               <input type="text" placeholder="Enter a name" className={`${styles.inputField}`}/>
             </div>
-            <button className={`${styles.button_3}`}>Submit</button>
+            <div className={`${styles.twopb} ${styles.mg_auto}`}>
+              <button className={`${styles.button_3}`}>Submit</button>
+            </div>
           </form>
         </div>
         

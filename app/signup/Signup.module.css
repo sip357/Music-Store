@@ -1,7 +1,11 @@
 .div{
   width: 50%;
+}
+
+.mg_auto{
   margin: auto;
 }
+
 
 .inputField{
   width: 100%;
