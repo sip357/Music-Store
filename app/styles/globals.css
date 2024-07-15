@@ -60,6 +60,20 @@ div a {
   justify-content: center;
 }
 
+label{
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: larger;
+  font-weight: bold;
+  color: white;
+}
+
+input{
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: larger;
+  font-weight: light;
+  color: grey;
+}
+
 /*Paragraph font*/
 .paraFonts{
   font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
