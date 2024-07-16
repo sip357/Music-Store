@@ -1,5 +1,5 @@
 // pages/api/subscribe.tsx
-import clientPromise from '../../lib/mongodb';
+import clientPromise from '../../lib/mongoose';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {

@@ -4,6 +4,8 @@ import styles from "./Store.module.css";
 import SearchBox from '../components/searchBox';
 import "../styles/globals.css";
 
+
+
 const Store: React.FC = () => {
   return (
     <Layout>

@@ -1,6 +1,6 @@
 // pages/api/beats.ts
 import type { NextApiRequest, NextApiResponse } from 'next';
-import clientPromise from '../../lib/mongodb';
+import clientPromise from '../../lib/mongoose';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
