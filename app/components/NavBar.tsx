@@ -28,12 +28,8 @@ const NavBar: React.FC = () => {
           <Link href="/store" prefetch={false}>Shop</Link>
         </li>
         <li>
-          <Link href="#about" scroll={true} className={styles.dropdown}>
+          <Link href="#about" scroll={true}>
             About
-            <div className={styles.dropdown_content}>
-              <a href="/">Instrumentals</a>
-              <a href="/">Soundkits</a>
-            </div>
           </Link>
         </li>
         <li>
