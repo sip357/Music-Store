@@ -2,6 +2,10 @@
   width: 50%;
 }
 
+.actualInput{
+  color: black;
+}
+
 .mg_auto{
   margin: auto;
 }
@@ -18,6 +22,8 @@
   width: 100%;
   font-size: large;
   padding: 0.5rem;
+  color: black;
+  font-weight: 500;
 }
 
 .button_3 {
