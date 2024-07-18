@@ -65,7 +65,6 @@ const Home: React.FC = () => {
               required
             />
           </div>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className={`${styles.twopb}`}>
             <label htmlFor="email">Email</label>
             <input
