@@ -5,33 +5,54 @@ import Layout from "../components/layout";
 import styles from "./Signup.module.css";
 import "../styles/globals.css";
 
-function ValidateEmail(input) {
-  var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  if (input.value.match(validRegex)) {
-    alert("Valid email address!");
-    return true;
-  } else {
-    alert("Invalid email address!");
-    return false;
-  }
-
+function ValidateEmail(email: string): boolean {
+  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  return validRegex.test(email);
 }
 
 const Home: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const createUser = async () => {
-      const response = await fetch('/api', {
-        method: 'POST',
-        body: JSON.stringify({ name, email }),
-      });
+    await fetch('/api', {
+      method: 'POST',
+      body: JSON.stringify({ name, email }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
+  if(name.length <= 3 || !ValidateEmail(email)){
+    var isButtondisabled = true;
+  } else{
+    var isButtondisabled = false;
+  }
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if(name.length <= 3 || !name){
+      setError('Name is required to create a user');
+      return;
     }
+    if (!email) {
+      setError('Email is required to create a user');
+      return;
+    }
+    if (!ValidateEmail(email)) {
+      setError('Invalid email address');
+      return;
+    }
+    setError(''); // Clear any existing error
+    createUser();
+  };
 
   return (
     <Layout>
       <div className={`${styles.div} ${styles.mg_auto}`}>
-        <form className={`${styles.twopb}`}>
+        <form onSubmit={handleSubmit} className={`${styles.twopb}`}>
           <div className={`${styles.twopb}`}>
             <label htmlFor="name">Name</label>
             <input
@@ -44,6 +65,7 @@ const Home: React.FC = () => {
               required
             />
           </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className={`${styles.twopb}`}>
             <label htmlFor="email">Email</label>
             <input
@@ -56,8 +78,9 @@ const Home: React.FC = () => {
               required
             />
           </div>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className={`${styles.twopb} ${styles.text_align_center}`}>
-            <button type="submit" onClick={createUser} className={`${styles.button_3}`}>
+            <button type="submit" disabled={isButtondisabled} className={`${styles.button_3}`}>
               Submit
             </button>
           </div>
