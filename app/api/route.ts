@@ -4,7 +4,7 @@ import connect from "../util/mongodb";
     // Connect the client to the server (optional starting in v4.7)
     const client = await connect
     // Send a ping to confirm a successful connection
-    const cursor = await client.db("music_store").collection("beats").find();
+    const cursor = client.db("music_store").collection("beats").find();
     const array = await cursor.toArray()
     return Response.json(array)
   }

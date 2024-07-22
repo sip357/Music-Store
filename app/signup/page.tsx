@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
 import styles from "./Signup.module.css";
-import "../styles/globals.css";
 
 function ValidateEmail(email: string): boolean {
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

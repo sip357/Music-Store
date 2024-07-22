@@ -20,11 +20,12 @@
 
 /* Products section styles */
 .productsContainer {
-  display: flex;
+  display: flexbox;
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
   margin-top: 20px;
+  margin: 20px;
   width: auto;
 }
 
