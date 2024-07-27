@@ -7,6 +7,11 @@ body {
   padding-top: 6rem;
 }
 
+.page_container{
+  position: relative;
+  min-height: 100vh;
+}
+
 /* Responsive navigation */
 nav a {
   color: white;
@@ -31,7 +36,7 @@ footer {
   width: 100%;
   left: 0;
   bottom: 0;
-  position: relative;
+  position: absolute;
 }
 
 div {

@@ -9,15 +9,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="page_container">
         <Head>
           <title>Music Store</title>
           <meta name="description" content="A website for selling instrumentals by SIP" />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <NavBar />
-        <main>{children}</main>
-        <footer>
+        <main className="fivepb">{children}</main>
+        <footer id="footer">
           <p>&copy; 2023 SIP</p>
         </footer>
       </body>
