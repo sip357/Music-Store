@@ -6,7 +6,7 @@ import Beat from '../types/beatType';
 
 async function getBeats(){
   const res = await fetch("http://localhost:3000/api/beatsAPI", {
-    next: { revalidate: 60 }, // Revalidate every 60 seconds
+    //next: { revalidate: 60 }, // Revalidate every 60 seconds
   })
 
   if(!res.ok){
@@ -51,7 +51,7 @@ export default async function Store() {
         <div key={beatObj._id} className={`${styles.productsContainer}`}>
           <div className={`${styles.product}`}>
             <img src="studio.jpg" alt="picture" className={styles.productImage}/>
-              <a href="/" key={beatObj._id.toString()} 
+              <a href={`/test/${beatObj._id}`} key={beatObj._id.toString()} 
               className={`${styles.productName} ${styles.a}`}>
                 {beatObj.Title}
               </a>
@@ -59,7 +59,8 @@ export default async function Store() {
               <span className={styles.playB}>
                 <span className={styles.gg_play_button}></span>
               </span>
-              <span className={styles.spc}>
+              <span key={beatObj._id.toString()}>
+                {beatObj.BPM}
               </span>
             </div>
           </div>
