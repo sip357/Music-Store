@@ -8,9 +8,10 @@
 .imageContainer{
     width: 30%;
     left: 100;
-    top: 200px;
-    background-color: white;
+    top: 100px;
+    /* background-color: white; */
     position: absolute;
+    text-align: center;
 }
 
 .tagContainer{
@@ -20,7 +21,7 @@
 
 .title{
     font-weight: bolder;
-    font-size:xx-large;
+    font-size: xx-large;
     padding-bottom: 1rem;
     display: block;
     font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
@@ -32,6 +33,18 @@
     color: white;
     display: block;
     font-weight: 450;
+    font-size:auto;
+}
+
+.productImage {
+    max-width: 100%;
+    display: block;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+.select{
+    background-color: white;
 }
 
 .options{
@@ -161,3 +174,35 @@
   .padding_top{
     padding-top: 6rem;
   }
+
+    /* Media queries for responsiveness */
+      
+      @media (max-width: 768px) {
+        .detailContainer{
+            float: none;
+            width: 45%;
+            margin-top: 0;
+            padding: 1rem;
+            margin: auto;
+        }
+        
+        .imageContainer{
+            width: 60%;
+            left: auto;
+            top: 0px;
+            /* background-color: white; */
+            position: relative;
+            text-align: center;
+            margin: auto;
+        }
+
+        .productImage {
+            max-width: 100%;
+            display: block;
+            text-align: center;
+            border-radius: 10px;
+          }
+        
+      }
+      
+      
