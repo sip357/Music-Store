@@ -30,7 +30,7 @@ export default async function Store() {
 
   return (
     <Layout>
-      <div className={`${styles.twopb} ${styles.secondNavContainer}`}>
+      <div className={`${styles.twopb} ${styles.secondNavContainer} ${styles.padding_top}`}>
         <button className={`${styles.paraFonts} ${styles.productTypes}`}>Instrumentals</button>
         <button className={`${styles.paraFonts} ${styles.productTypes}`}>Sound Kits</button>
       </div>
@@ -51,7 +51,7 @@ export default async function Store() {
         <div key={beatObj._id} className={`${styles.productsContainer}`}>
           <div className={`${styles.product}`}>
             <img src="studio.jpg" alt="picture" className={styles.productImage}/>
-              <a href={`/test/${beatObj._id}`} key={beatObj._id.toString()} 
+              <a href={`/store/${beatObj._id}`} key={beatObj._id.toString()} 
               className={`${styles.productName} ${styles.a}`}>
                 {beatObj.Title}
               </a>

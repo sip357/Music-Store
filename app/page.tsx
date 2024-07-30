@@ -5,7 +5,7 @@ import './styles/globals.css';
 export default function def() {
   return (
     <Layout>
-      <div>
+      <div className="padding_top">
         <h1>Where instrumentals meet talent</h1>
         <p>Discover your sounds</p>
         <p>Browse through our selection of beats and sound kits.</p>

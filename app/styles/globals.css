@@ -4,6 +4,10 @@ body {
   padding: 0;
   background: #000000;
   overflow-x: hidden;
+  /* padding-top: 6rem; */
+}
+
+.padding_top{
   padding-top: 6rem;
 }
 

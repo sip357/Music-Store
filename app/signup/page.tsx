@@ -50,7 +50,7 @@ const Home: React.FC = () => {
 
   return (
     <Layout>
-      <div className={`${styles.div} ${styles.mg_auto}`}>
+      <div className={`${styles.div} ${styles.mg_auto} ${styles.padding_top}`}>
         <form onSubmit={handleSubmit} className={`${styles.twopb}`}>
           <div className={`${styles.twopb}`}>
             <label htmlFor="name">Name</label>

@@ -18,6 +18,10 @@
   justify-content: center;
 }
 
+.padding_top{
+  padding-top: 6rem;
+}
+
 .inputField{
   width: 100%;
   font-size: large;

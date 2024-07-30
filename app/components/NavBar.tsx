@@ -27,11 +27,11 @@ const NavBar: React.FC = () => {
         <li>
           <Link href="/store" prefetch={false}>Shop</Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="#about" scroll={true}>
             About
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/signup" className={styles['button-3']} role="button">
             Sign Up
