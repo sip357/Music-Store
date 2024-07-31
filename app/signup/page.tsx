@@ -1,33 +1,56 @@
 'use client';
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Layout from "../components/layout";
 import styles from "./Signup.module.css";
+import PurpleButton from "../components/purpleButton";
 
 function ValidateEmail(email: string): boolean {
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   return validRegex.test(email);
 }
 
+function ValidatePassword(password: string): boolean{
+  const validRegex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
+  return validRegex.test(password);
+}
+
 const Home: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    if(name.length <= 3 || !ValidateEmail(email) || !password || password.length <= 10){
+      setIsButtonDisabled(true);
+    } else {
+      setIsButtonDisabled(false);
+    }
+  }, [name, email, password]);
 
   const createUser = async () => {
-    await fetch('/api', {
-      method: 'POST',
-      body: JSON.stringify({ name, email }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-  }
-
-  if(name.length <= 3 || !ValidateEmail(email)){
-    var isButtondisabled = true;
-  } else{
-    var isButtondisabled = false;
+    try {
+      const response = await fetch('/api/userAPI', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, password }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if(response.ok){
+        setError(''); // Clear any existing error
+        router.push('/login');
+      } else{
+        const data = await response.json();
+        setError(data.message || 'Error creating user')
+      }
+    } catch (error) {
+      setError('Error creating user');
+    }
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -42,6 +65,10 @@ const Home: React.FC = () => {
     }
     if (!ValidateEmail(email)) {
       setError('Invalid email address');
+      return;
+    }
+    if(!password){
+      setError("Enter password");
       return;
     }
     setError(''); // Clear any existing error
@@ -76,11 +103,21 @@ const Home: React.FC = () => {
               required
             />
           </div>
+          <div className={`${styles.twopb}`}>
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`${styles.inputField}`}
+              required
+            />
+          </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className={`${styles.twopb} ${styles.text_align_center}`}>
-            <button type="submit" disabled={isButtondisabled} className={`${styles.button_3}`}>
-              Submit
-            </button>
+            <PurpleButton param1="Sign up" param2={isButtonDisabled}/>
           </div>
         </form>
       </div>

@@ -37,7 +37,7 @@ export default async function Store() {
       <div >
       </div>
       <div><SearchBox /></div>
-      <div className={`${styles.twopb} ${styles.mainContainer}`}>
+      <div className={`${styles.twopb} ${styles.tagsContainer}`}>
         <span className={styles.onep}><button className={styles.button_34} role="button">Emo</button></span>
         <span className={styles.onep}><button className={styles.button_34} role="button">Guitar</button></span>
         <span className={styles.onep}><button className={styles.button_34} role="button">LoFi</button></span>

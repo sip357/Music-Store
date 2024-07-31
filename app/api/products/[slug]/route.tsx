@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
     const collection = database.collection("beats");
 
     // Convert the string id to ObjectId
-    const beatData = await collection.findOne({ _id: new ObjectId(slug) });  
+    const beatData = await collection.findOne({ id: new ObjectId(slug) });  
 
     if (!beatData) {
       return new Response(JSON.stringify({ error: 'Beat not found' }), {

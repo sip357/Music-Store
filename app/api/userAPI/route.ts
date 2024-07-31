@@ -1,4 +1,5 @@
 import connect from '../../util/mongodb';
+import bcrypt from 'bcrypt';
 
 export async function GET(request: Request) {
   try {
@@ -16,9 +17,9 @@ export async function POST(request: Request) {
   try {
     const client = await connect;
     const body = await request.json();
-    await client.db("music_store").collection("beats")
-      .insertOne({ name: body.name, email: body.email});
-    console.log("Success");
+    const hashedPassword = await bcrypt.hash(body.password, 4);
+    await client.db("music_store").collection("subscribers")
+      .insertOne({ name: body.name, email: body.email, password: hashedPassword});
     return Response.json({ message: "Successfully signed up" });
   } catch (error) {
     console.error(error);

@@ -33,6 +33,11 @@ const NavBar: React.FC = () => {
           </Link>
         </li> */}
         <li>
+          <Link href="/login" className={styles['button-3']} role="button">
+            Login
+          </Link>
+        </li>
+        <li>
           <Link href="/signup" className={styles['button-3']} role="button">
             Sign Up
           </Link>

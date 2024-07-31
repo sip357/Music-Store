@@ -33,7 +33,7 @@ export default async function ProductPage({ params }) {
         <div className={`${styles.imageContainer} ${styles.padding_top}`}>
           <img src="\studio.jpg" alt="picture" className={`${styles.productImage}`}/>
           <div className="onep">
-            <select name="Pick Lease" id="SelectLease" className={`${styles.select}`}>
+            <select name="Pick Lease" id="SelectLease"  className={`${styles.select} ${styles.button_31}`}>
               <option value="First Form">First Form</option>
               <option value="Second Form">Second Form</option>
               <option value="Third Form">Third Form</option>
@@ -42,7 +42,7 @@ export default async function ProductPage({ params }) {
           </div>
         </div> 
         <div className={`${styles.detailContainer}`}>
-          <div className={`${styles.title}`}>
+          <div className={`${styles.songTitle}`}>
             {beat.Title}
           </div>
           <div className={`${styles.details}`}>
@@ -53,11 +53,11 @@ export default async function ProductPage({ params }) {
             <span className={`${styles.onep}`} key={tag.id}><button className={`${styles.button_34}`}>{tag}</button></span>
             )}
           </div>
-          <span className={styles.addToCart}>
+          <div className={styles.addToCart}>
             <button className={styles.addToCart}>
               Add to Cart
             </button>
-          </span>
+          </div>
         </div>
     </Layout>
   );
