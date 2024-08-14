@@ -26,13 +26,3 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-
-export async function PUT(request: Request){
-  try {
-    // Your logic here
-    return Response.json({ message: 'Success' }),{status: 200};
-  } catch (error) {
-    console.error('Error handling request:', error);
-    return Response.json({ error: 'Internal Server Error' }, { status: 500 });
-  }
-}

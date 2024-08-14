@@ -1,28 +1,28 @@
 'use client';
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { filterBeats } from "../actions";
+import { filterBeats, setPrice } from "../actions";
 
 export interface SelectionState {
-    beats: any[], // Specify the type if you know it, e.g., string[] or Beat[]
-    filteredBeats: any[] // Specify the type if you know it, e.g., string[] or Beat[]
+    price: number,
+    // newBeats: any[] 
 }
 
 const initialState: SelectionState = {
-    beats: [],
-    filteredBeats: []
+    price: 10,
+    // filteredBeats: []
 }
 
 export const selectionSlice = createSlice({
     name: 'filter',
     initialState,
     reducers: {
-        setBeat: (state, action: PayloadAction<any[]>) => {
-            state.beats = action.payload;
+        setPrice: (state, action: PayloadAction<number>) => {
+            state.price = action.payload;
         }
     }
 })
 
-export const { setBeat } = selectionSlice.actions;
+export const price = selectionSlice.actions;
 
 export default selectionSlice.reducer;

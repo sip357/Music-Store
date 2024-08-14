@@ -1,6 +1,6 @@
-export const setBeats = (beats) => ({
-    type: "SET_BEATS",
-    payload: beats
+export const setPrice = (price) => ({
+    type: "SET_PRICE",
+    payload: price
 });
 
 export const filterBeats = (filteredBeats) => ({

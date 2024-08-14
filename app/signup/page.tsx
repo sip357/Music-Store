@@ -11,10 +11,10 @@ function ValidateEmail(email: string): boolean {
   return validRegex.test(email);
 }
 
-function ValidatePassword(password: string): boolean{
-  const validRegex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
-  return validRegex.test(password);
-}
+// function ValidatePassword(password: string): boolean{
+//   const validRegex = /^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+$/;
+//   return validRegex.test(password);
+// }
 
 const Home: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -25,6 +25,19 @@ const Home: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
+    if (name.length <= 3) {
+      setError("Name must be longer than 3 characters");
+      setIsButtonDisabled(true);
+    } else if (!ValidateEmail(email)) {
+      setError("Invalid email address");
+      setIsButtonDisabled(true);
+    } else if (password.length <= 10) {
+      setError("Password must be longer than 10 characters");
+      setIsButtonDisabled(true);
+    } else {
+      setError("");
+      setIsButtonDisabled(false);
+    }
     if(name.length <= 3 || !ValidateEmail(email) || !password || password.length <= 10){
       setIsButtonDisabled(true);
     } else {
@@ -51,6 +64,20 @@ const Home: React.FC = () => {
     } catch (error) {
       setError('Error creating user');
     }
+  }
+
+  //Used to get all the users
+  const getUsers = async () => {
+    const response = await fetch('/api/userAPI', {
+      method: 'GET',
+    })
+  }
+
+  function userExists(uname: string, mail: string) : boolean{
+    if(uname === name){
+
+    }
+    return false;
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
