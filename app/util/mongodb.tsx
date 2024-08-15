@@ -1,5 +1,4 @@
 import { MongoClient, ServerApiVersion } from 'mongodb'
-import { GridFsStorage } from 'multer-gridfs-storage'
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')

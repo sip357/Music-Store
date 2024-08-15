@@ -5,8 +5,8 @@ import SearchBox from '../components/searchBox';
 import Beat from '../types/beatType';
 
 async function getBeats(){
-  const res = await fetch("http://localhost:3000/api/beatsAPI", {
-    //next: { revalidate: 60 }, // Revalidate every 60 seconds
+  const res = await fetch("http://localhost:3000/api/beatsAPI",  {
+    next: { revalidate: 3600 }, // Revalidate every 60 seconds
   })
 
   if(!res.ok){
@@ -17,16 +17,9 @@ async function getBeats(){
 }
 
 export default async function Store() {
-    // const response = await fetch("http://localhost:3000/api")
-
-
     await getBeats();
-    // if(!response.ok){
-    //   throw new Error(`Response status: ${response.status}`)
-    // }
 
-    const beats: Beat[] = await getBeats();
-  
+    const beats: Beat[] = await getBeats();  
 
   return (
     <Layout>
@@ -51,7 +44,7 @@ export default async function Store() {
         <div key={beatObj._id} className={`${styles.productsContainer}`}>
           <div className={`${styles.product}`}>
             <img src="studio.jpg" alt="picture" className={styles.productImage}/>
-              <a href={`/store/${beatObj._id}`} key={beatObj._id.toString()} 
+              <a href={`/store/${beatObj.Title}`} key={beatObj._id.toString()} 
               className={`${styles.productName} ${styles.a}`}>
                 {beatObj.Title}
               </a>

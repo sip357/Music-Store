@@ -1,15 +1,16 @@
 import { ObjectId } from 'mongodb';
 import connect from '../../../util/mongodb';
 
-export async function GET(request, { params }) {
+export async function GET(request: Request, { params }) {
   try {
     const { slug } = params;
     const client = await connect;
-    const database = client.db("music_store");
-    const collection = database.collection("beats");
+    const beatData = await client.db("music_store").collection("beats").findOne({ Title: slug });
+    // const database = client.db("music_store");
+    // const collection = database.collection("beats");
 
-    // Convert the string id to ObjectId
-    const beatData = await collection.findOne({ id: new ObjectId(slug) });  
+    // // Convert the string id to ObjectId
+    // const beatData = await collection.findOne({ title: new (slug) });  
 
     if (!beatData) {
       return new Response(JSON.stringify({ error: 'Beat not found' }), {

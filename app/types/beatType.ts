@@ -4,6 +4,7 @@ type Beat = {
     Title: string,
     Tags: string[],
     BPM: number,
+    Price: number,
 }
 
 export default Beat;
