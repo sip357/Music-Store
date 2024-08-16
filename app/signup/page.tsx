@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Layout from "../components/layout";
 import styles from "./Signup.module.css";
 import PurpleButton from "../components/purpleButton";
+import "../styles/globals.css";
 
 function ValidateEmail(email: string): boolean {
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -21,29 +22,41 @@ const Home: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const [nameError, setNameError] = useState<string>(''); 
+  const [emailError, setEmailError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');  
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(true);
   const router = useRouter();
 
   useEffect(() => {
+    let isValid = true;
+  
     if (name.length <= 3) {
-      setError("Name must be longer than 3 characters");
-      setIsButtonDisabled(true);
-    } else if (!ValidateEmail(email)) {
-      setError("Invalid email address");
-      setIsButtonDisabled(true);
-    } else if (password.length <= 10) {
-      setError("Password must be longer than 10 characters");
-      setIsButtonDisabled(true);
+      setNameError("Name must be longer than 3 characters");
+      isValid = false;
     } else {
-      setError("");
-      setIsButtonDisabled(false);
+      setNameError(""); // Clear name error if validation passes
     }
-    if(name.length <= 3 || !ValidateEmail(email) || !password || password.length <= 10){
-      setIsButtonDisabled(true);
+  
+    if (!ValidateEmail(email)) {
+      setEmailError("Invalid email address");
+      isValid = false;
     } else {
-      setIsButtonDisabled(false);
+      setEmailError(""); // Clear email error if validation passes
     }
+  
+    if (password.length <= 10) {
+      setPasswordError("Password must be longer than 10 characters");
+      isValid = false;
+    } else {
+      setPasswordError(""); // Clear password error if validation passes
+    }
+  
+    setIsButtonDisabled(!isValid); // Enable button if all validations pass
+    setError(""); // Clear general error if specific errors are handled
+  
   }, [name, email, password]);
+  
 
   const createUser = async () => {
     try {
@@ -66,48 +79,65 @@ const Home: React.FC = () => {
     }
   }
 
-  //Used to get all the users
-  const getUsers = async () => {
-    const response = await fetch('/api/userAPI', {
-      method: 'GET',
-    })
+// Used to get all the users
+const getUsers = async () => {
+  const response = await fetch('/api/userAPI', {
+    method: 'GET',
+  });
+  return response.json();
+}
+
+async function userExists(): Promise<boolean> {
+  const users = await getUsers();
+
+  // Check if any user matches the given username or email
+  return users.some((user: { name: string; email: string }) => 
+    user.name === name || user.email === email
+  );
+}
+
+const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  
+  if (name.length <= 3 || !name) {
+    setError('Name is required and must be longer than 3 characters');
+    return;
+  }
+  
+  if (!email) {
+    setError('Email is required to create a user');
+    return;
   }
 
-  function userExists(uname: string, mail: string) : boolean{
-    if(uname === name){
-
-    }
-    return false;
+  if (!ValidateEmail(email)) {
+    setError('Invalid email address');
+    return;
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if(name.length <= 3 || !name){
-      setError('Name is required to create a user');
-      return;
-    }
-    if (!email) {
-      setError('Email is required to create a user');
-      return;
-    }
-    if (!ValidateEmail(email)) {
-      setError('Invalid email address');
-      return;
-    }
-    if(!password){
-      setError("Enter password");
-      return;
-    }
-    setError(''); // Clear any existing error
-    createUser();
-  };
+  if (!password) {
+    setError('Enter a password');
+    return;
+  }
+
+  // Check if the user already exists asynchronously
+  const exists = await userExists();
+  if (exists) {
+    setError('User already exists');
+    return;
+  }
+
+  setError(''); // Clear any existing error
+  createUser(); // Call your createUser function
+};
 
   return (
-    <Layout>
-      <div className={`${styles.div} ${styles.mg_auto} ${styles.padding_top}`}>
+    // <Layout>
+      <html>
+        <body>
+          <div className={`${styles.div} ${styles.mg_auto} ${styles.padding_top}`}>
         <form onSubmit={handleSubmit} className={`${styles.twopb}`}>
           <div className={`${styles.twopb}`}>
-            <label htmlFor="name">Name</label>
+            <label htmlFor="name" className={`${styles.required}`}>Name</label>
             <input
               type="text"
               id="name"
@@ -117,9 +147,11 @@ const Home: React.FC = () => {
               className={`${styles.inputField}`}
               required
             />
+            {nameError && <span style={{ color: 'red', padding:0 }}>{nameError}</span>}
           </div>
+          
           <div className={`${styles.twopb}`}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email" className={`${styles.required}`}>Email</label>
             <input
               type="email"
               id="email"
@@ -129,9 +161,11 @@ const Home: React.FC = () => {
               className={`${styles.inputField}`}
               required
             />
+            {emailError && <span style={{ color: 'red', padding:0 }}>{emailError}</span>}
           </div>
+          
           <div className={`${styles.twopb}`}>
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password" className={`${styles.required}`}>Password</label>
             <input
               type="password"
               id="password"
@@ -141,6 +175,7 @@ const Home: React.FC = () => {
               className={`${styles.inputField}`}
               required
             />
+            {passwordError && <span style={{ color: 'red', padding:0 }}>{passwordError}</span>}
           </div>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <div className={`${styles.twopb} ${styles.text_align_center}`}>
@@ -148,7 +183,10 @@ const Home: React.FC = () => {
           </div>
         </form>
       </div>
-    </Layout>
+        </body>
+      </html>
+      
+    // </Layout> 
   );
 };
 

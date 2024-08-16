@@ -1,3 +1,12 @@
+:root {
+  --white: #afafaf;
+  --red: #e31b23;
+  --bodyColor: #292a2b;
+  --borderFormEls: hsl(0, 0%, 10%);
+  --bgFormEls: hsl(0, 0%, 14%);
+  --bgFormElsFocus: hsl(0, 7%, 20%);
+}
+
 .div{
   width: 50%;
 }
@@ -26,8 +35,10 @@
   width: 100%;
   font-size: large;
   padding: 0.5rem;
-  color: black;
+  color: #afafaf;
   font-weight: 500;
+  background-color: #292a2b;
+  border-width:inherit;
 }
 
 .button_3 {
@@ -53,6 +64,12 @@
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+.required::after{
+  content: "*";
+  color: red;
+  font-size: 20px;
 }
 
 .button_3:focus:not(:focus-visible):not(.focus-visible) {

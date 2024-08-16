@@ -99,6 +99,9 @@ export default async function ProductPage({ params }: GetStaticPropsContext<{ ti
                   id="SelectLease"
                   className={`${styles.select} ${styles.button_31}`}
                   // onChange={handleSelectChange}
+                  //CHANGE: Due to complexity, the model will now change to only 'Lease' and 'Exlusive
+                  //Lease: 10-20 USD (may be different)
+                  //Exclusive will have a separate 
                 >
                     <option value="First Form">First Form</option>
                     <option value="Second Form">Second Form</option>
@@ -126,6 +129,7 @@ export default async function ProductPage({ params }: GetStaticPropsContext<{ ti
           </div>
           <div className={styles.addToCart}>
             <button
+              type="submit"
               className={styles.addToCart}
               // onClick={() => handleAddToCart(select, beat._id)}
             >
