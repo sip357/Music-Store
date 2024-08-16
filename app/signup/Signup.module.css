@@ -28,7 +28,7 @@
 }
 
 .padding_top{
-  padding-top: 6rem;
+  padding-top: 0.5rem;
 }
 
 .inputField{
@@ -64,6 +64,19 @@
   touch-action: manipulation;
   vertical-align: middle;
   white-space: nowrap;
+}
+
+.arrow {
+  content: "\2190";
+  color: white;
+  font-size: 60px;
+  margin-left: 30px;
+}
+
+.loginLink{
+  text-decoration: underline;
+  color: white;
+  font-size:medium;
 }
 
 .required::after{
