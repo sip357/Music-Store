@@ -4,62 +4,73 @@ import React, { useState } from "react";
 import Layout from "../components/layout";
 import styles from "../login/login.module.css";
 import { useRouter } from "next/navigation";
+import { deleteVerificationToken } from "../lib/token";
+import { generateVerificationToken } from "../lib/createToken";
 
-function ValidateEmail(email: string): boolean {
-  const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-  return validRegex.test(email);
-}
+// function ValidateEmail(email: string): boolean {
+//   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+//   return validRegex.test(email);
+// }
 
 export default function LoginPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const checkHash = async () => {
-    try {
-      const response = await fetch("/api/authen", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        router.push("/store");
-      } else {
-        const data = await response.json();
-        if (response.status === 403) {
-          setError("Invalid password");
-        } else if (response.status === 404) {
-          setError("User not found");
+    const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState<string | null>(null);
+  
+    const checkHash = async () => {
+      try {
+        const response = await fetch("/api/loginAPI", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (response.ok) {
+          // If login is successful, return true
+          return true;
         } else {
-          setError(data.error || "Unknown error occurred");
+          const data = await response.json();
+          if (response.status === 403) {
+            setError("Invalid email or password");
+          } else if (response.status === 404) {
+            setError("User not found");
+          } else {
+            setError(data.error || "Unknown error occurred");
+          }
+          return false; // Login failed
         }
+      } catch (error) {
+        console.error("Error during fetch:", error);
+        setError("Internal server error");
+        return false; // Login failed due to server error
       }
-    } catch (error) {
-      console.error("Error during fetch:", error);
-      setError("Internal server error");
-    }
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!email) {
-      setError("Email is required");
-      return;
-    }
-    if (!ValidateEmail(email)) {
-      setError("Invalid email address");
-      return;
-    }
-    if (!password) {
-      setError("Password is required");
-      return;
-    }
-    setError(null); // Clear previous errors
-    checkHash();
-  };
+    };
+  
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      if (!email) {
+        setError("Email is required");
+        return;
+      }
+      if (!password) {
+        setError("Password is required");
+        return;
+      }
+      setError(null); // Clear previous errors
+  
+      const isLoginSuccessful = await checkHash();
+      if (isLoginSuccessful) {
+        // Only run these functions if the login was successful
+        await deleteVerificationToken(email);
+        await generateVerificationToken(email);
+  
+        // Navigate to the store page
+        router.push("/store");
+      }
+    };
 
   return (
     <Layout>

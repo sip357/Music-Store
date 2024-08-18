@@ -8,17 +8,15 @@ export async function POST(request: Request) {
     
     const body = await request.json();
     
-    // // Hash the password entered
-    // const hashedPassword = await bcrypt.hash(body.password, 4);
-    
     // Check if the email exists in the database
     const user = await client.db("music_store").collection("subscribers").findOne({ email: body.email });
     
+    //If user isn't found return a status 404.
     if (!user) {
       return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
     }
 
-    // Handle password checking logic here if needed
+    // Checks if the password matches
     const passwordMatches = await bcrypt.compare(body.password, user.password);
 
     if(passwordMatches){

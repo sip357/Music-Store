@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Layout from "../components/layout";
 import styles from "./Signup.module.css";
 import PurpleButton from "../components/purpleButton";
 import "../styles/globals.css";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Session } from "next-auth";
+import { generateVerificationToken } from "../lib/createToken";
 
 function ValidateEmail(email: string): boolean {
   const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/;
@@ -19,7 +21,7 @@ function ValidatePassword(password: string): boolean{
   return validRegex.test(password);
 }
 
-const Home: React.FC = () => {
+const SignIn: React.FC = () => {
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -49,7 +51,7 @@ const Home: React.FC = () => {
     }
   
     if(!ValidatePassword(password)){
-      setPasswordError("Must be at least 8 characters and contain at least 1 of each: a-z, A-Z, 0-9, #?!@$()_%^{}&*.-")
+      setPasswordError("At least 8 characters; Must contain at least 1 of each: a-z, A-Z, 0-9, #?!@$()_%^{}&*.-")
       isValid = false;
       } else {
         setPasswordError(""); // Clear password error if validation passes
@@ -135,6 +137,7 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
   setError(''); // Clear any existing error
   createUser(); // Call your createUser function
+  const verificationToken = generateVerificationToken(email);
 };
 
   const handleBackClick = () =>{
@@ -222,4 +225,4 @@ const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
   );
 };
 
-export default Home;
+export default SignIn;

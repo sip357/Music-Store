@@ -1,6 +1,7 @@
 import connect from '../../util/mongodb';
 import bcrypt from 'bcrypt';
 
+//get all users
 export async function GET(request: Request) {
   try {
     const client = await connect;
@@ -13,6 +14,7 @@ export async function GET(request: Request) {
   }
 }
 
+//create new user
 export async function POST(request: Request) {
   try {
     const client = await connect;
@@ -20,7 +22,11 @@ export async function POST(request: Request) {
     const hashedPassword = await bcrypt.hash(body.password, 4);
     await client.db("music_store").collection("subscribers")
       .insertOne({ name: body.name, email: body.email, password: hashedPassword});
+    
+    //Generate token
+
     return Response.json({ message: "Successfully signed up" });
+
   } catch (error) {
     console.error(error);
     return Response.json({ error: 'Internal Server Error' }, { status: 500 });

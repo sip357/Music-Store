@@ -3,7 +3,6 @@ import { GetStaticPropsContext } from "next";
 import React from "react"
 import "../../../public/studio.jpg"
 import Layout from '../../components/layout';
-import Product from "../../components/product";
 import Beat from "../../types/beatType";
 import styles from '../../styles/product.module.css';
 
