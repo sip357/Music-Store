@@ -4,12 +4,12 @@ export default function NavBar() {
     return (
         <nav className="flex justify-between bg-gray-900 text-white w-screen">
             <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-                <Link href={"#"} className="text-3xl font-bold font-heading">
+                <Link href={"/"} className="text-3xl font-bold font-heading">
                     {/* Logo Here. */}<img className="h-9" src="logo.png" alt="logo"></img> 
                 </Link>
                 {/* <!-- Nav Links --> */}
                 <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-                    <Link href="#" className="hover:text-gray-200">Home</Link>
+                    <Link href="/" className="hover:text-gray-200">Home</Link>
                     <Link href="/product" className="hover:text-gray-200">Instrumentals</Link>
                     <Link href="#" className="hover:text-gray-200">Contact Us</Link>
                 </ul>
