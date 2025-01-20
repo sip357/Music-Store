@@ -19,8 +19,8 @@ export default function ProductCard({
                     <div className="flex">
                         <img className="relative inset-y-0 left-0 w-1/4" src={ProductPicture} alt={ProductTitle} />
                         <div className="px-6 m-auto">
-                            <div className="font-bold text-xl mb-2 text-center">{ProductTitle}</div>
-                            <p className="text-gray-700 text-base text-center">
+                            <div className="font-bold text-base mb-2 text-center">{ProductTitle}</div>
+                            <p className="text-gray-700 text-sm text-center">
                                 {ProductBPM} bpm
                             </p>
                         </div>
