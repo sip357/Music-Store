@@ -13,6 +13,7 @@
     --background: radial-gradient(circle, rgb(46, 63, 145) 0%, rgb(105, 32, 112) 100%);
     --foreground: #ededed;
     --productCardColour: #121212;
+    --userFormColor: #1c1c1c;
   }
 }
 
@@ -31,6 +32,10 @@ main {
 
 .productCardBackground {
   background: var(--productCardColour);
+}
+
+.userFormBackground {
+  background: var(--userFormColor);
 }
 
 tr {
