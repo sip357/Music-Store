@@ -1,10 +1,10 @@
 import { ObjectId } from "mongodb";
 
 export interface Beat {
-    _id: ObjectId; // Standard MongoDB field for document IDs,
+    Id: string,
     Title: string,
     BPM: number,
-    hashtags?: string[],
-    Price: number,
-    src?: string,
+    Hashtags: string[],
+    Price?: number,
+    src: string,
 }

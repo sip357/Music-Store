@@ -2,6 +2,7 @@
 import  React, { useEffect, useRef, useState } from "react";
 import { Beat } from "../models";
 import { ForwardIcon, PauseIcon, PlayIcon, RewindIcon } from "./icons";
+import ProductList from "./product/ProductList";
 
 interface AudioPlayerProps {
   playlist: Beat[];
@@ -13,6 +14,7 @@ export default function AudioPlayer({ playlist }: AudioPlayerProps) {
   const [progress, setProgress] = useState<number>(0); // State to manage the progress of the current track
   const [currentTime, setCurrentTime] = useState<number>(0); // State to manage the current time of the track
   const [duration, setDuration] = useState<number>(0); // State to manage the duration of the track
+  const [listOpen, setListOpen] = useState<boolean>(false); // State to manage the visibility of the playlist
   const audioRef = useRef<HTMLAudioElement | null>(null); // Ref to manage the audio element
 
 
@@ -63,6 +65,10 @@ export default function AudioPlayer({ playlist }: AudioPlayerProps) {
     }
   };
 
+  const handleListOpen = () => {
+    setListOpen(!listOpen);
+  }
+
   // Function to format time in minutes and seconds
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -79,34 +85,47 @@ export default function AudioPlayer({ playlist }: AudioPlayerProps) {
       audioRef.current.currentTime = 0; // Reset the current time for the new track
       setCurrentTime(0); // Reset the current time in state
       setProgress(0); // Reset progress for the new track
-      if (isPlaying) {
-        // Play the new track if the player is in playing state
-        audioRef.current.play();
-      }
     }
-  }, [currentTrackIndex, playlist, isPlaying]);
+  }, [currentTrackIndex, playlist]);
+
+  useEffect(() => {
+    if (audioRef.current && isPlaying) {
+      audioRef.current.play();
+    } else if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
   
 
   return (
-    <div className="flex w-full bg-white text-black h-12">
-      <span>{formatTime(currentTime)}</span>
-      <div className="flex w-full justify-center items-center gap-3 size-6">
-        <button onClick={handlePrevTrack}>
-          <RewindIcon/>
-        </button>
-        <button onClick={handlePlayPause}>
-          {isPlaying ? (<PauseIcon />) : (<PlayIcon />)}
-        </button>
-        <button onClick={handleNextTrack}>
-          <ForwardIcon/>
+    <div>
+      <div className="flex w-full bg-white text-black h-12">
+        <span>{formatTime(currentTime)}</span>
+        <div className="flex w-full justify-center items-center gap-3 size-6">
+          <button onClick={handlePrevTrack}>
+            <RewindIcon/>
+          </button>
+          <button onClick={handlePlayPause}>
+            {isPlaying ? (<PauseIcon />) : (<PlayIcon />)}
+          </button>
+          <button onClick={handleNextTrack}>
+            <ForwardIcon/>
+          </button>
+        </div>
+        <span>{formatTime(duration)}</span> 
+        <audio 
+          ref={audioRef}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+        />
+        <button onClick={handleListOpen}>
+          {listOpen ? "Close Playlist" : "Open Playlist"}
         </button>
       </div>
-      <span>{formatTime(duration)}</span> 
-      <audio 
-        ref={audioRef}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
-      />
+      <div>
+        {listOpen ? <ProductList beats={playlist}/> : ""}
+      </div>
     </div>
+    
   );
 }
