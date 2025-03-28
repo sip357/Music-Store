@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { fetchAudio, getBeats } from "../services";
+import { getBeats } from "../beatServices";
 import { Beat } from "../models";
 import AudioPlayer from "../components/audioPlayer";
 import ProductList from "../components/product/ProductList";
@@ -13,10 +13,20 @@ export default function ProductContainer() {
     const [audioLoading, setAudioLoading] = useState<boolean>(false); //Check if the app is fetching audio
     const hasRun = useRef(false);
 
-    const fetchBeats = async () => {
-        console.log("FetchBeats called")
-        if (isLoading) return; // Prevent duplicate requests
+    // const fakeBeats = [
+    //     { Title: "Test Beat 1", BPM: 120, Hashtags: ["chill", "lofi"]},
+    //     { Title: "Test Beat 2", BPM: 130, Hashtags: ["trap"]},
+    // ];
     
+    // useEffect(() => {
+    //     setBeats(fakeBeats);
+    // }, []);
+
+    const fetchBeats = async () => {
+        console.log("Fetching beats...");
+        console.log("Calling getBeats with lastID:", lastID);
+        if (isLoading) return;
+        
         setIsLoading(true);
     
         try {
@@ -25,30 +35,38 @@ export default function ProductContainer() {
                 beatsWithUrls: Beat[];
                 lastKey: string | null;
             } = await getBeats(lastID);
+            console.log("Response:", response);
     
-            if (response.status === 200) {
-                // Update beats state
+            if (response.status === 200 && response.beatsWithUrls.length > 0) {
                 setBeats((prevBeats) => [...prevBeats, ...response.beatsWithUrls]);
-
-                //Allow Audio component to access url
                 setAudioLoading(false);
-    
-                // Update lastID and hasMore states
                 setLastID(response.lastKey || null);
-                if (!response.lastKey) {
-                    setHasMore(false); // No more items to fetch
-                }
-                setIsLoading(false);
-                return
+                setHasMore(!!response.lastKey);
             } else {
-                console.error("Error fetching items.");
+                console.log("No beats returned from API.");
+                console.warn("No beats returned from API.");
+                setHasMore(false);
             }
         } catch (error) {
-            console.error("Error fetching beats: ", error);
+            console.error("Error fetching beats:", error);
         } finally {
             setIsLoading(false);
         }
-    };    
+    };
+
+    // useEffect(() => {
+    //     (async () => {
+    //         try {
+    //             console.log("Testing getBeats with lastID = null...");
+    //             const response = await getBeats(null);
+    //             console.log("API Response:", response);
+    //         } catch (error) {
+    //             console.error("Error calling getBeats:", error);
+    //         }
+    //     })();
+    // }, []);
+    
+       
 
     // Fetch initial items on mount
     useEffect(() => {
@@ -61,7 +79,7 @@ export default function ProductContainer() {
 
     return (
         <div className="overflow-x-auto my-6">
-            <ProductList beats={beats} />
+            <ProductList beats={beats}/>
             <div className="flex items-center justify-center my-2">
                 {hasMore ? (
                 <button onClick={fetchBeats} disabled={isLoading}

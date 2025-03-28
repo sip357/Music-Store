@@ -1,10 +1,9 @@
 import { ObjectId } from "mongodb";
 
 export interface Beat {
-    Id: string,
+    Id?: string,
     Title: string,
     BPM: number,
-    Hashtags: string[],
-    Price?: number,
-    src: string,
+    Hashtags?: string[],
+    src?: string,
 }
