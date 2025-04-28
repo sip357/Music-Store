@@ -6,21 +6,23 @@ import AudioPlayer from "../components/audioPlayer";
 import ProductList from "../components/product/ProductList";
 
 export default function ProductContainer() {
-    const [beats, setBeats] = useState<Beat[]>([]); // Store fetched items
-    const [lastID, setLastID] = useState<string | null>(null); //Keep track of the most recent document
-    const [hasMore, setHasMore] = useState<boolean>(true); //Check if there are more documents
-    const [isLoading, setIsLoading] = useState(false); //Check if the app is fetching data
-    const [audioLoading, setAudioLoading] = useState<boolean>(false); //Check if the app is fetching audio
-    const hasRun = useRef(false);
+    // Store fetched items in state
+    const [beats, setBeats] = useState<Beat[]>([]);
 
-    // const fakeBeats = [
-    //     { Title: "Test Beat 1", BPM: 120, Hashtags: ["chill", "lofi"]},
-    //     { Title: "Test Beat 2", BPM: 130, Hashtags: ["trap"]},
-    // ];
+    //Keep track of the most recent document fetched by the API using lastID
+    const [lastID, setLastID] = useState<string | null>(null);
     
-    // useEffect(() => {
-    //     setBeats(fakeBeats);
-    // }, []);
+    // //Check if there are more documents to load
+    const [hasMore, setHasMore] = useState<boolean>(true);
+
+    // //Check if the app is fetching data
+    const [isLoading, setIsLoading] = useState(false);
+
+    // //Check if the app is fetching audio
+    const [audioLoading, setAudioLoading] = useState<boolean>(false);
+
+    // Ref to check if the function has run before
+    const hasRun = useRef(false);
 
     const fetchBeats = async () => {
         console.log("Fetching beats...");
@@ -33,15 +35,25 @@ export default function ProductContainer() {
             const response: {
                 status: number;
                 beatsWithUrls: Beat[];
-                lastKey: string | null;
+                lastKey: {S: string} | null;
             } = await getBeats(lastID);
-            console.log("Response:", response);
+            console.log("API Response:", response);
+            console.log("Response status:", response.status);
+            console.log("Lastkey:", response.lastKey);
+            console.log("Bears with URLs:", response.beatsWithUrls);
     
             if (response.status === 200 && response.beatsWithUrls.length > 0) {
                 setBeats((prevBeats) => [...prevBeats, ...response.beatsWithUrls]);
                 setAudioLoading(false);
-                setLastID(response.lastKey || null);
-                setHasMore(!!response.lastKey);
+
+                // Extract and update lastID
+                const nextLastID = response.lastKey?.S || null;
+                setLastID(nextLastID);
+                console.log("Updated Last ID:", nextLastID);
+
+                // Check if there are more items to load
+                // Set hasMore to false if there are no more items to load
+                setHasMore(!!nextLastID);
             } else {
                 console.log("No beats returned from API.");
                 console.warn("No beats returned from API.");
@@ -52,21 +64,7 @@ export default function ProductContainer() {
         } finally {
             setIsLoading(false);
         }
-    };
-
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             console.log("Testing getBeats with lastID = null...");
-    //             const response = await getBeats(null);
-    //             console.log("API Response:", response);
-    //         } catch (error) {
-    //             console.error("Error calling getBeats:", error);
-    //         }
-    //     })();
-    // }, []);
-    
-       
+    };       
 
     // Fetch initial items on mount
     useEffect(() => {

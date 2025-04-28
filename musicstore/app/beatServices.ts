@@ -1,6 +1,6 @@
 export const getBeats = async (lastId: String | null) => {
   try {
-    const response = await fetch(`/api/getInstrumentals?lastID=${lastId || ""}`, {
+    const response = await fetch(`/api/getInstrumentals?lastId=${lastId || ""}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
