@@ -80,7 +80,7 @@ export default function AudioPlayer({ playlist }: AudioPlayerProps) {
     if (audioRef.current) {
       // Pause current track and prepare the new one
       audioRef.current.pause();
-      audioRef.current.src = playlist[currentTrackIndex]?.src || "";
+      audioRef.current.src = playlist[currentTrackIndex]?.src?.S || "";
       audioRef.current.load();
       audioRef.current.currentTime = 0; // Reset the current time for the new track
       setCurrentTime(0); // Reset the current time in state
