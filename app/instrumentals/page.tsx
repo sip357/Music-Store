@@ -21,9 +21,6 @@ export default function ProductContainer() {
     const hasRun = useRef(false);
 
     const fetchBeats = async () => {
-        console.log("Fetching beats...");
-        console.log("Calling getBeats with lastID:", globalPlaylist.lastID);
-
         // Check if the app is already loading data
         // If it is, do not call the API again
         if (isLoading) return;
@@ -37,7 +34,7 @@ export default function ProductContainer() {
                 lastKey: {S: string} | null;
             } = await getBeats(globalPlaylist.lastID);
             console.log("API Response:", response);
-            console.log("Response status:", response.status);
+            console.log("Responsstatus:", response.status);
             console.log("Lastkey:", response.lastKey);
             console.log("Bears with URLs:", response.beatsWithUrls);
     

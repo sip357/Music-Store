@@ -19,6 +19,7 @@ type PlaylistContextType = {
 const PlaylistContext = createContext<PlaylistContextType | undefined>(undefined);
 
 export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [hasfetched, setHasFetched] = useState<boolean>(false);
     const [playlist, setPlaylist] = useState<Beat[]>([]);
     const [lastID, setLastID] = useState<string | null>(null);
     const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
@@ -31,6 +32,8 @@ export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
                 beatsWithUrls: Beat[];
                 lastKey: { S: string } | null;
             } = await getBeats(null);
+
+            setHasFetched(true);
 
             switch (response?.status) {
                 case 200:

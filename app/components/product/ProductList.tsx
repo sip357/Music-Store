@@ -14,6 +14,10 @@ export default function ProductList() {
         Hashtags: beat?.Hashtags?.SS || [],
     }));
 
+    const isActive = (index: number) => {
+        return index === globalPlaylist.currentTrackIndex;
+    }
+
     if (!normalizedBeats || normalizedBeats.length === 0) {
         return <div>No products available.</div>; // Handle empty state
     }
@@ -30,7 +34,10 @@ export default function ProductList() {
                 </thead>
                 <tbody>
                     {normalizedBeats.map((beat, index) => (
-                        <tr key={index}>
+                        <tr 
+                            key={index}
+                            className={`border-b ${isActive(index) ? "font-bold text-black" : ""}`}
+                        >
                             <td>
                                 <button
                                     onClick={() => {
