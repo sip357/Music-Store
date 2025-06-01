@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "./components/nav/navbar";
 import Footer from "./components/footer";
+import AudioPlayer from "./components/audioPlayer";
+import { PlaylistProvider } from "./context/PlaylistContext";
 
 
 const geistSans = localFont({
@@ -31,11 +33,15 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className="antialiased flex flex-col">
-        <NavBar />
-        <main>
-          {children}
-        </main>
-        <Footer />
+        <PlaylistProvider>
+          <NavBar />
+          <main>
+            {children}
+          </main>
+          {/* <AudioPlayer playlist={}/> */}
+          <Footer />
+          <AudioPlayer />
+        </PlaylistProvider>
       </body>
     </html>
   );

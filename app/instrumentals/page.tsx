@@ -2,15 +2,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { getBeats } from "../beatServices";
 import { Beat } from "../models";
-import AudioPlayer from "../components/audioPlayer";
+import { usePlaylist } from "../context/PlaylistContext";
 import ProductList from "../components/product/ProductList";
 
 export default function ProductContainer() {
-    // Store fetched items in state
-    const [beats, setBeats] = useState<Beat[]>([]);
-
-    //Keep track of the most recent document fetched by the API using lastID
-    const [lastID, setLastID] = useState<string | null>(null);
+    const globalPlaylist = usePlaylist();
     
     // //Check if there are more documents to load
     const [hasMore, setHasMore] = useState<boolean>(true);
@@ -26,7 +22,10 @@ export default function ProductContainer() {
 
     const fetchBeats = async () => {
         console.log("Fetching beats...");
-        console.log("Calling getBeats with lastID:", lastID);
+        console.log("Calling getBeats with lastID:", globalPlaylist.lastID);
+
+        // Check if the app is already loading data
+        // If it is, do not call the API again
         if (isLoading) return;
         
         setIsLoading(true);
@@ -36,25 +35,60 @@ export default function ProductContainer() {
                 status: number;
                 beatsWithUrls: Beat[];
                 lastKey: {S: string} | null;
-            } = await getBeats(lastID);
+            } = await getBeats(globalPlaylist.lastID);
             console.log("API Response:", response);
             console.log("Response status:", response.status);
             console.log("Lastkey:", response.lastKey);
             console.log("Bears with URLs:", response.beatsWithUrls);
     
             if (response.status === 200 && response.beatsWithUrls.length > 0) {
-                setBeats((prevBeats) => [...prevBeats, ...response.beatsWithUrls]);
+                globalPlaylist.setPlaylist((prevBeats) => [...prevBeats, ...response.beatsWithUrls]);
                 setAudioLoading(false);
 
                 // Extract and update lastID
                 const nextLastID = response.lastKey?.S || null;
-                setLastID(nextLastID);
+                globalPlaylist.setLastID(nextLastID);
                 console.log("Updated Last ID:", nextLastID);
 
                 // Check if there are more items to load
                 // Set hasMore to false if there are no more items to load
                 setHasMore(!!nextLastID);
-            } else {
+            } else if (response.status === 200 && response.beatsWithUrls.length === 0) {
+                console.log("No more beats to load.");
+                setHasMore(false);
+            }
+            else if (response.status === 500) {
+                console.error("Server error:", response);
+                setHasMore(false);
+            } else if (response.status === 400) {
+                console.error("Bad request:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 401) {
+                console.error("Unauthorized:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 403) {
+                console.error("Forbidden:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 404) {
+                console.error("Not found:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 429) {
+                console.error("Too many requests:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 503) {
+                console.error("Service unavailable:", response);
+                setHasMore(false);
+            }
+            else if (response.status === 504) {
+                console.error("Gateway timeout:", response);
+                setHasMore(false);
+            }            
+            else {
                 console.log("No beats returned from API.");
                 console.warn("No beats returned from API.");
                 setHasMore(false);
@@ -77,7 +111,7 @@ export default function ProductContainer() {
 
     return (
         <div className="overflow-x-auto my-6">
-            <ProductList beats={beats}/>
+            <ProductList/>
             <div className="flex items-center justify-center my-2">
                 {hasMore ? (
                 <button onClick={fetchBeats} disabled={isLoading}
@@ -86,19 +120,9 @@ export default function ProductContainer() {
                     {isLoading ? "Loading..." : "Load More"}
                     </button>
                 ) : (
-                    <span>No more beats to load.</span>
+                    <span>No more beats to loads.</span>
                 )}
             </div>
-            <section>
-                {audioLoading ? (
-                    ""
-                ) : (
-                    <div className="block w-full mr-auto ml-auto">
-                        <AudioPlayer playlist ={beats} />
-                    </div>
-                )
-                }
-            </section>
         </div>
     );
 }
