@@ -1,4 +1,5 @@
-import { Beat } from "@/app/models";
+// /product/ProductList.tsx
+'use client';
 import React from "react";
 import { usePlaylist } from "@/app/context/PlaylistContext";
 

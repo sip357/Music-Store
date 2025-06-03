@@ -1,4 +1,5 @@
-
+// /product/ProductCard.tsx
+import React from 'react';
 interface ProductCardProps {
     ProductPicture: string;
     ProductTitle: string;
