@@ -2,7 +2,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Beat } from "../models";
+import { Beat } from "../models/User";
 import { getBeats } from "../beatServices";
 
 type PlaylistContextType = {

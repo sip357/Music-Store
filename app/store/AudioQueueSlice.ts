@@ -1,6 +1,6 @@
 // store/audioQueueSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { Beat } from '../models';
+import { Beat } from '../models/User';
 
 const audioQueueSlice = createSlice({
   name: 'audioQueue',

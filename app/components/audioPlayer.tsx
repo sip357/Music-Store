@@ -1,6 +1,6 @@
 'use client';
 import  React, { useEffect, useRef, useState } from "react";
-import { Beat } from "../models";
+import { Beat } from "../models/User";
 import { ForwardIcon, PauseIcon, PlayIcon, RewindIcon } from "./icons";
 import ProductList from "./product/ProductList";
 import { usePlaylist } from "../context/PlaylistContext";
