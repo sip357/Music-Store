@@ -1,6 +1,6 @@
-export const getBeats = async (lastId: String | null) => {
+export const getInstrumentals = async (lastId: String | null) => {
   try {
-    const response = await fetch(`/api/getInstrumentals?lastId=${lastId || ""}`, {
+    const response = await fetch(`/api/getBeats/multiple?cursor=${lastId || ""}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

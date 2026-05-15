@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import { getBeats } from "../beatServices";
+import { getInstrumentals } from "../beatServices";
 import { Beat } from "../models/Beat";
 import { usePlaylist } from "../context/PlaylistContext";
 import ProductList from "../components/product/ProductList";
@@ -28,64 +28,23 @@ export default function ProductContainer() {
         setIsLoading(true);
     
         try {
-            const response: {
-                status: number;
-                beatsWithUrls: Beat[];
-                lastKey: {S: string} | null;
-            } = await getBeats(globalPlaylist.lastID);
+            const response: Beat[] = await getInstrumentals(globalPlaylist.lastID);
             console.log("API Response:", response);
-            console.log("Responsstatus:", response.status);
-            console.log("Lastkey:", response.lastKey);
-            console.log("Bears with URLs:", response.beatsWithUrls);
     
-            if (response.status === 200 && response.beatsWithUrls.length > 0) {
-                globalPlaylist.setPlaylist((prevBeats) => [...prevBeats, ...response.beatsWithUrls]);
+            if (response.length > 0) {
+                // Append new beats to the existing playlist
+                globalPlaylist.setPlaylist((prevBeats) => [...prevBeats, ...response]);
                 setAudioLoading(false);
 
                 // Extract and update lastID
-                const nextLastID = response.lastKey?.S || null;
-                globalPlaylist.setLastID(nextLastID);
+                const nextLastID = response[response.length - 1]._id; // Assuming each beat has a unique 'id' field
+                globalPlaylist.setLastID(nextLastID!);
                 console.log("Updated Last ID:", nextLastID);
 
                 // Check if there are more items to load
                 // Set hasMore to false if there are no more items to load
                 setHasMore(!!nextLastID);
-            } else if (response.status === 200 && response.beatsWithUrls.length === 0) {
-                console.log("No more beats to load.");
-                setHasMore(false);
-            }
-            else if (response.status === 500) {
-                console.error("Server error:", response);
-                setHasMore(false);
-            } else if (response.status === 400) {
-                console.error("Bad request:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 401) {
-                console.error("Unauthorized:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 403) {
-                console.error("Forbidden:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 404) {
-                console.error("Not found:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 429) {
-                console.error("Too many requests:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 503) {
-                console.error("Service unavailable:", response);
-                setHasMore(false);
-            }
-            else if (response.status === 504) {
-                console.error("Gateway timeout:", response);
-                setHasMore(false);
-            }            
-            else {
+            } else {
                 console.log("No beats returned from API.");
                 console.warn("No beats returned from API.");
                 setHasMore(false);

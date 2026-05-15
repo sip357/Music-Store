@@ -3,7 +3,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Beat } from "../models/Beat";
-import { getBeats } from "../beatServices";
+import { getInstrumentals } from "../beatServices";
 
 type PlaylistContextType = {
   playlist: Beat[];
@@ -27,68 +27,12 @@ export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     useEffect(() => {
         const fetchBeats = async () => {
-            const response: {
-                status: number;
-                beatsWithUrls: Beat[];
-                lastKey: { S: string } | null;
-            } = await getBeats(null);
+            const response: Beat[] | null = await getInstrumentals(null);
 
             setHasFetched(true);
 
-            switch (response?.status) {
-                case 200:
-                    setPlaylist(response.beatsWithUrls);
-                    setLastID(response.lastKey?.S || null);
-                    console.log("Last ID:", response.lastKey?.S);
-                    console.log("Beats with URLs:", response.beatsWithUrls);
-                    break;
-                case 204:
-                    console.log("No beats returned from API.");
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 400:
-                    console.error("Bad request: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 401:
-                    console.error("Unauthorized: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 403:
-                    console.error("Forbidden: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 404:
-                    console.error("Not found: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 429:
-                    console.error("Too many requests: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 500:
-                    console.error("Server error: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 503:
-                    console.error("Service unavailable: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                case 504:
-                    console.error("Gateway timeout: ", response.status);
-                    setPlaylist([]);
-                    setLastID(null);
-                    break;
-                default:
-                    console.error("Failed to fetch playlist");
+            if (response) {
+                setPlaylist(response);
             }
         };
         fetchBeats();

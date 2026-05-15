@@ -10,9 +10,9 @@ export default function ProductList() {
     // Normalize the beats array
     const beatsArray = Array.isArray(beats) ? beats : [beats];
     const normalizedBeats = beatsArray.map((beat) => ({
-        Title: beat?.Title?.S || "Unknown Title",
-        BPM: beat?.BPM?.N || "Unknown BPM",
-        Hashtags: beat?.Hashtags?.SS || [],
+        Title: beat.title || "Unknown Title",
+        BPM: beat.bpm || "Unknown BPM",
+        Hashtags: beat.hashtags || [],
     }));
 
     const isActive = (index: number) => {

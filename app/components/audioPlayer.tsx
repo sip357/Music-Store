@@ -1,6 +1,6 @@
 'use client';
 import  React, { useEffect, useRef, useState } from "react";
-import { Beat } from "../models/User";
+import { Beat } from "../models/Beat";
 import { ForwardIcon, PauseIcon, PlayIcon, RewindIcon } from "./icons";
 import ProductList from "./product/ProductList";
 import { usePlaylist } from "../context/PlaylistContext";
@@ -82,7 +82,7 @@ export default function AudioPlayer() {
     if (audioRef.current) {
       // Pause current track and prepare the new one
       audioRef.current.pause();
-      audioRef.current.src = globalPlaylist.playlist[currentTrackIndex]?.src?.S || "";
+      audioRef.current.src = globalPlaylist.playlist[currentTrackIndex]?.audioUrl || "";
       audioRef.current.load();
       audioRef.current.currentTime = 0; // Reset the current time for the new track
       setCurrentTime(0); // Reset the current time in state

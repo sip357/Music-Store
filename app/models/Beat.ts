@@ -1,4 +1,5 @@
 export interface Beat {
+    _id?: string;
     title: string;
     artist: string;
     price: number;
@@ -6,5 +7,5 @@ export interface Beat {
     hashtags?: string[];
     audioUrl: string;
     coverImageUrl: string;
-    dateAdded: Date;
+    dateAdded?: Date;
 }
