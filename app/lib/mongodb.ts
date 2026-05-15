@@ -1,13 +1,20 @@
-import mongoose from "mongoose";
+// lib/mongodb.ts
+import { MongoClient, Db } from "mongodb";
+
 const uri = process.env.MONGO_URI;
-if (!uri) {
-    throw new Error('MONGO_URI is not defined in the environment variables');
-}
+const DB_NAME = process.env.MONGO_DB_NAME; // change this to your actual database name
+
+let client: MongoClient;
+let db: Db;
 
 export async function connectDB() {
-    if (mongoose.connection.readyState >= 1) {
-        return;
+    if (db) return db;
+    if (!uri) {
+        throw new Error("MONGO_URI environment variable is not defined");
     }
+    client = new MongoClient(uri);
+    await client.connect();
 
-    await mongoose.connect(uri as string);
+    db = client.db(DB_NAME); // change this to your actual database name
+    return db;
 }

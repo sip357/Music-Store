@@ -1,14 +1,12 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-
-import User from "../../../models/User";
 import { connectDB } from "../../../lib/mongodb";
 
 export async function POST(req: Request) {
     try {
-        const { email, password } : { email: string; password: string } = await req.json();
-        
-        // Validate email and password
+        const body = await req.json();
+        const { email, password }: { email: string; password: string } = body;
+
         if (!email || !password) {
             return NextResponse.json(
                 { message: "Email and password are required" },
@@ -16,18 +14,20 @@ export async function POST(req: Request) {
             );
         }
 
-        await connectDB();
+        const db = await connectDB();
+        const users = db.collection("users");
 
-        const user = await User.findOne({ email });
+        // check if user exists
+        const existingUser = await users.findOne({ email });
 
-        if (!user) {
+        if (!existingUser) {
             return NextResponse.json(
                 { message: "Invalid credentials" },
                 { status: 401 }
             );
         }
 
-        const isMatch = await bcrypt.compare(password, user.password);
+        const isMatch = await bcrypt.compare(password, existingUser.password);
 
         if (!isMatch) {
             return NextResponse.json(

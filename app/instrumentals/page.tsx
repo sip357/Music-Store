@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { getBeats } from "../beatServices";
-import { Beat } from "../models/User";
+import { Beat } from "../models/Beat";
 import { usePlaylist } from "../context/PlaylistContext";
 import ProductList from "../components/product/ProductList";
 

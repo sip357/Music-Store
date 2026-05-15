@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-
-import User from "../../../models/User";
 import { connectDB } from "../../../lib/mongodb";
 
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-
-        const { email, password } : { email: string; password: string } = body;
+        const { email, password }: { email: string; password: string } = body;
 
         if (!email || !password) {
             return NextResponse.json(
@@ -17,9 +14,11 @@ export async function POST(req: Request) {
             );
         }
 
-        await connectDB();
+        const db = await connectDB();
+        const users = db.collection("users");
 
-        const existingUser = await User.findOne({ email });
+        // check if user exists
+        const existingUser = await users.findOne({ email });
 
         if (existingUser) {
             console.warn(`Attempt to sign up with existing email: ${email}`);
@@ -31,26 +30,34 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({
+        const result = await users.insertOne({
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            createdAt: new Date(),
         });
+
+        const user = {
+            _id: result.insertedId,
+            email,
+            createdAt: new Date(),
+        };
 
         return NextResponse.json(
             {
                 message: "Account created",
-                user: {
-                    id: user._id,
-                    email: user.email
-                }
+                user,
             },
             { status: 201 }
         );
 
     } catch (error) {
         console.error("Error during sign-up:", error);
+
         return NextResponse.json(
-            { error_message: error instanceof Error ? error.message : "Internal server error" },
+            {
+                error_message:
+                    error instanceof Error ? error.message : "Internal server error",
+            },
             { status: 500 }
         );
     }
