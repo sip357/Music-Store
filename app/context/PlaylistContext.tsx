@@ -2,12 +2,12 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { Beat } from "../models/User";
+import { IBeat } from "../models/Beat";
 import { getBeats } from "../beatServices";
 
 type PlaylistContextType = {
-  playlist: Beat[];
-  setPlaylist: React.Dispatch<React.SetStateAction<Beat[]>>;
+  playlist: IBeat[];
+  setPlaylist: React.Dispatch<React.SetStateAction<IBeat[]>>;
   currentTrackIndex: number;
   setCurrentTrackIndex: React.Dispatch<React.SetStateAction<number>>;
   isPlaying: boolean;
@@ -20,7 +20,7 @@ const PlaylistContext = createContext<PlaylistContextType | undefined>(undefined
 
 export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [hasfetched, setHasFetched] = useState<boolean>(false);
-    const [playlist, setPlaylist] = useState<Beat[]>([]);
+    const [playlist, setPlaylist] = useState<IBeat[]>([]);
     const [lastID, setLastID] = useState<string | null>(null);
     const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
     const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -29,7 +29,7 @@ export const PlaylistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         const fetchBeats = async () => {
             const response: {
                 status: number;
-                beatsWithUrls: Beat[];
+                beatsWithUrls: IBeat[];
                 lastKey: { S: string } | null;
             } = await getBeats(null);
 
