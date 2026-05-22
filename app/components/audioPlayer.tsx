@@ -22,17 +22,21 @@ export default function AudioPlayer() {
 
   // Function to handle play/pause toggle
   const handlePlayPause = () => {
-    if(!audioRef.current) return
-    
-    if (isPlaying) {
-      audioRef.current?.pause();
-      setIsPlaying(false);
-      console.log("Current time: ", currentTime);
-    } else {
-      audioRef.current?.play();
-      setIsPlaying(true);
+    if (!audioRef.current) return;
+
+    const audio = audioRef.current;
+
+    try {
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        audio.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Playback error:", error);
     }
-    setIsPlaying(!isPlaying);
   };
 
   // Function to handle next track
@@ -78,6 +82,23 @@ export default function AudioPlayer() {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
+
+const playAudio = async () => {
+  if (!audioRef.current) return;
+
+  try {
+    await audioRef.current.play();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const pauseAudio = () => {
+  if (!audioRef.current) return;
+
+  audioRef.current.pause();
+};
+  // Effect to update the audio source when the current track index changes
   useEffect(() => {
     if (audioRef.current) {
       // Pause current track and prepare the new one
@@ -87,16 +108,29 @@ export default function AudioPlayer() {
       audioRef.current.currentTime = 0; // Reset the current time for the new track
       setCurrentTime(0); // Reset the current time in state
       setProgress(0); // Reset progress for the new track
+      if (isPlaying) {
+        playAudio();
+      }
     }
   }, [currentTrackIndex, globalPlaylist.playlist]);
 
+  // useEffect(() => {
+  //   playAudio();,
+  // }, [currentTrackIndex]);
   useEffect(() => {
-    if (audioRef.current && isPlaying) {
-      audioRef.current.play();
-    } else if (audioRef.current) {
-      audioRef.current.pause();
-    }
-  }, [isPlaying]);
+  const track =
+    globalPlaylist.playlist[currentTrackIndex];
+
+  if (!audioRef.current || !track) return;
+
+  const audio = audioRef.current;
+
+  audio.src = track.audioUrl;
+
+  if (isPlaying) {
+    playAudio();
+  }
+}, [currentTrackIndex]);
   
 
   return (
