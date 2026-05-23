@@ -4,13 +4,17 @@ import { ObjectId } from "mongodb";
 
 export async function GET(request: NextRequest) {
     try {
+        const beatsCollectionName = process.env.BEATS_COLLECTION_NAME;
+        if (!beatsCollectionName) {
+            throw new Error("BEATS_COLLECTION_NAME is not defined in environment variables");
+        }
         const { searchParams } = new URL(request.url);
         const id = searchParams.get("id");
 
         console.log("Received ID:", id);
 
         const db = await connectDB();
-        const beatsCollection = db.collection("beats");
+        const beatsCollection = db.collection(beatsCollectionName);
 
         let query = {};
 

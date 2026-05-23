@@ -4,6 +4,10 @@ import { connectDB } from "../../../lib/mongodb";
 
 export async function POST(req: Request) {
     try {
+        const usersCollectionName = process.env.USERS_COLLECTION_NAME;
+        if (!usersCollectionName) {
+            throw new Error("USERS_COLLECTION_NAME is not defined in environment variables");
+        }
         const body = await req.json();
         const { email, password }: { email: string; password: string } = body;
 
@@ -15,7 +19,7 @@ export async function POST(req: Request) {
         }
 
         const db = await connectDB();
-        const users = db.collection("users");
+        const users = db.collection(usersCollectionName);
 
         // check if user exists
         const existingUser = await users.findOne({ email });
