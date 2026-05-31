@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import { connectDB } from "../../../lib/mongodb";
 
 export async function POST(req: Request) {
@@ -40,11 +41,26 @@ export async function POST(req: Request) {
             );
         }
 
-        
-        return NextResponse.json(
-            { message: "Sign-in successful" },
+        const token = jwt.sign(
+            { userId: existingUser._id },
+            process.env.JWT_SECRET ||
+                "default_secret_key",
+            { expiresIn: "1h" }
+        );
+
+        const response = NextResponse.json(
+            { message: "Sign-in successful", token },
             { status: 200 }
         );
+
+        response.cookies.set("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 3600, // 1 hour
+        });
+
+        return response;
     } catch (error) {
         console.error("Error during sign-in:", error);
         return NextResponse.json(
