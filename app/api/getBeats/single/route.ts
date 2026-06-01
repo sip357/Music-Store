@@ -22,6 +22,11 @@ export async function GET(request: NextRequest) {
             query = {
                 _id: new ObjectId(id)
             };
+        } else {
+            return NextResponse.json(
+                { error: "ID parameter is required" },
+                { status: 400 }
+            );
         }
 
         const beat = await beatsCollection

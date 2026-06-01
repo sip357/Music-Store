@@ -12,6 +12,10 @@ export async function connectDB() {
     if (!uri) {
         throw new Error("MONGO_URI environment variable is not defined");
     }
+
+    if (!DB_NAME) {
+        throw new Error("MONGO_DB_NAME environment variable is not defined");
+    }
     client = new MongoClient(uri);
     await client.connect();
 
