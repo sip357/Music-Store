@@ -1,14 +1,11 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { connectDB } from "../../../lib/mongodb";
+import { createToken } from "@/app/lib/auth";
+import User from "@/app/models/User";
 
 export async function POST(req: Request) {
     try {
-        const usersCollectionName = process.env.USERS_COLLECTION_NAME;
-        if (!usersCollectionName) {
-            throw new Error("USERS_COLLECTION_NAME is not defined in environment variables");
-        }
         const body = await req.json();
         const { email, password }: { email: string; password: string } = body;
 
@@ -19,11 +16,10 @@ export async function POST(req: Request) {
             );
         }
 
-        const db = await connectDB();
-        const users = db.collection(usersCollectionName);
-
+        await connectDB();
+        
         // check if user exists
-        const existingUser = await users.findOne({ email });
+        const existingUser = await User.findOne({ email });
 
         if (!existingUser) {
             return NextResponse.json(
@@ -41,12 +37,7 @@ export async function POST(req: Request) {
             );
         }
 
-        const token = jwt.sign(
-            { userId: existingUser._id },
-            process.env.JWT_SECRET ||
-                "default_secret_key",
-            { expiresIn: "1h" }
-        );
+        const token = createToken(existingUser._id);
 
         const response = NextResponse.json(
             { message: "Sign-in successful", token },
@@ -57,7 +48,7 @@ export async function POST(req: Request) {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
-            maxAge: 3600, // 1 hour
+            maxAge: 3600 * 124 * 7, // 7 days
         });
 
         return response;

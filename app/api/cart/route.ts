@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
 import { getUserFromToken } from "../../lib/getUser";
 import { connectDB } from "@/app/lib/mongodb";
+import Cart from "@/app/models/Cart";
 
 export async function GET() {
   try {
-    const cartsCollectionName = process.env.CARTS_COLLECTION_NAME;
-
-    if (!cartsCollectionName) {
-      throw new Error("CARTS_COLLECTION_NAME is not defined");
-    }
-
     const user = await getUserFromToken();
 
     if (!user) {
@@ -19,12 +14,9 @@ export async function GET() {
       );
     }
 
-    const db = await connectDB();
-    // The connectDB helper already returns the database instance
-    const cartsCollection = db.collection(cartsCollectionName);
+    await connectDB();
 
-    const cart = await cartsCollection.findOne({
-      //UserId is stored as a string in the database, so we can query it directly without converting to ObjectId
+    const cart = await Cart.findOne({
       userId: user.userId
     });
 
@@ -49,16 +41,8 @@ export async function GET() {
   }
 }
 
-// Additional API routes for POST, PUT, DELETE can be implemented similarly, handling cart creation, updates, and deletion as needed.
-
 export async function POST(request: Request) {
   try {
-    const cartsCollectionName = process.env.CARTS_COLLECTION_NAME;
-
-    if (!cartsCollectionName) {
-      throw new Error("CARTS_COLLECTION_NAME is not defined");
-    }
-
     const user = await getUserFromToken();
 
     if (!user) {
@@ -68,38 +52,28 @@ export async function POST(request: Request) {
       );
     }
 
-    const db = await connectDB();
-    const cartsCollection = db.collection(cartsCollectionName);
-    const existingCart = await cartsCollection.findOne({
+    await connectDB();
+
+    const existingCart = await Cart.findOne({
       userId: user.userId
     });
+
     if (existingCart) {
       return NextResponse.json(
         { message: "Cart already exists" },
         { status: 400 }
       );
-      // // Add item to existing cart
-      // const updatedCart = await cartsCollection.findOneAndUpdate(
-      //   { userId: user.userId },
-      //   { $push: { items: { productId: "exampleProductId", quantity: 1 } } },
-      //   { returnDocument: "after" }
-      // );
-      // console.log("Updated cart:", updatedCart);
-      // return NextResponse.json(
-      //   { cart: updatedCart.value },
-      //   { status: 200 }
-      // );
     }
 
-    const newCart = {
+    const newCart = new Cart({
       userId: user.userId,
       items: []
-    };
+    });
 
-    const result = await cartsCollection.insertOne(newCart);
-    console.log("Created cart:", result);
+    await newCart.save();
+
     return NextResponse.json(
-      { cartId: result.insertedId },
+      { cartId: newCart._id },
       { status: 201 }
     );
   } catch (error) {
@@ -109,20 +83,4 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
-}
-
-export async function PUT(request: Request) {
-  // Implement cart update logic here (e.g., adding/removing items, updating quantities)
-  return NextResponse.json(
-    { message: "Cart update functionality not implemented yet" },
-    { status: 501 }
-  );
-}
-
-export async function DELETE() {
-  // Implement cart deletion logic here
-  return NextResponse.json(
-    { message: "Cart deletion functionality not implemented yet" },
-    { status: 501 }
-  );
 }

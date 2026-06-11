@@ -1,6 +1,6 @@
 // store/audioQueueSlice.js
 import { createSlice } from '@reduxjs/toolkit';
-import { Beat } from '../models/User';
+import { IBeat } from '../models/Beat';
 
 const audioQueueSlice = createSlice({
   name: 'audioQueue',
@@ -10,8 +10,8 @@ const audioQueueSlice = createSlice({
     currentAudio: null, // Holds the currently playing audio URL
   },
   reducers: {
-    addToQueue(state: {queue: Beat[]}, action : {
-        payload: Beat,
+    addToQueue(state: {queue: IBeat[]}, action : {
+        payload: IBeat,
     }) {
       state.queue.push(action.payload); // Add new audio URL to queue
     },

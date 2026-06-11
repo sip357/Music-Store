@@ -1,34 +1,31 @@
 import { connectDB } from "@/app/lib/mongodb";
 import { NextResponse, NextRequest } from "next/server";
-import { ObjectId } from "mongodb";
+import Beat from "@/app/models/Beat";
+import { Types } from "mongoose";
 
 export async function GET(request: NextRequest) {
     try {
-        const beatsCollectionName = process.env.BEATS_COLLECTION_NAME;
-        if (!beatsCollectionName) {
-            throw new Error("BEATS_COLLECTION_NAME is not defined in environment variables");
-        }
         const { searchParams } = new URL(request.url);
         const cursor = searchParams.get("cursor");
 
         console.log("Received cursor:", cursor);
 
-        const db = await connectDB();
-        const beatsCollection = db.collection(beatsCollectionName);
+        await connectDB();
 
-        let query = {};
+        let query: Record<string, any> = {};
 
         if (cursor) {
-            query = {
-                _id: { $gt: new ObjectId(cursor) }
-            };
+            // Validate cursor is a valid ObjectId
+            if (Types.ObjectId.isValid(cursor)) {
+                query = {
+                    _id: { $gt: new Types.ObjectId(cursor) }
+                };
+            }
         }
 
-        const beats = await beatsCollection
-            .find(query)
+        const beats = await Beat.find(query)
             .sort({ _id: 1 })
-            .limit(10)
-            .toArray();
+            .limit(10);
 
         return NextResponse.json(beats);
 

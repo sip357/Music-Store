@@ -1,31 +1,49 @@
 // lib/mongodb.ts
-import { MongoClient, Db } from "mongodb";
+import mongoose from "mongoose";
 
 declare global {
-    var _mongoClientPromise: Promise<MongoClient> | undefined;
+    var mongoose: {
+        conn: any;
+        promise: Promise<any> | null;
+    };
 }
 
-const uri = process.env.MONGO_URI;
-const DB_NAME = process.env.MONGO_DB_NAME;
-    if (!uri) {
-        throw new Error("MONGO_URI environment variable is not defined");
-    }
-    if (!DB_NAME) {
-        throw new Error("MONGO_DB_NAME environment variable is not defined");
-    }
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-let db: Db;
+const MONGO_URI = process.env.MONGO_URI || "";
 
-if (!globalThis._mongoClientPromise) {
-    client = new MongoClient(uri);
-    globalThis._mongoClientPromise = client.connect();
+if (!MONGO_URI) {
+    throw new Error("MONGO_URI environment variable is not defined");
 }
 
-clientPromise = globalThis._mongoClientPromise;
+let cached = global.mongoose;
+
+if (!cached) {
+    global.mongoose = { conn: null, promise: null };
+    cached = global.mongoose;
+}
 
 export async function connectDB() {
-    const client = await clientPromise;
-    db = client.db(DB_NAME);
-    return db;
+    if (cached.conn) {
+        return cached.conn;
+    }
+
+    if (!cached.promise) {
+        const opts = {
+            bufferCommands: false,
+        };
+
+        cached.promise = mongoose
+            .connect(MONGO_URI, opts)
+            .then((mongoose) => {
+                return mongoose;
+            });
+    }
+
+    try {
+        cached.conn = await cached.promise;
+    } catch (e) {
+        cached.promise = null;
+        throw e;
+    }
+
+    return cached.conn;
 }

@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { connectDB } from "../../../lib/mongodb";
+import User from "@/app/models/User";
 
 export async function POST(req: Request) {
     try {
-        const usersCollectionName = process.env.USERS_COLLECTION_NAME;
-        if (!usersCollectionName) {
-            throw new Error("USERS_COLLECTION_NAME is not defined in environment variables");
-        }
         const body = await req.json();
         const { email, password }: { email: string; password: string } = body;
 
@@ -18,11 +15,10 @@ export async function POST(req: Request) {
             );
         }
 
-        const db = await connectDB();
-        const users = db.collection(usersCollectionName);
+        await connectDB();
 
         // check if user exists
-        const existingUser = await users.findOne({ email });
+        const existingUser = await User.findOne({ email });
 
         if (existingUser) {
             console.warn(`Attempt to sign up with existing email: ${email}`);
@@ -34,16 +30,18 @@ export async function POST(req: Request) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const result = await users.insertOne({
+        const newUser = new User({
             email,
             password: hashedPassword,
-            createdAt: new Date(),
+            dateCreated: new Date(),
         });
 
+        await newUser.save();
+
         const user = {
-            _id: result.insertedId,
-            email,
-            createdAt: new Date(),
+            _id: newUser._id,
+            email: newUser.email,
+            dateCreated: newUser.dateCreated,
         };
 
         return NextResponse.json(
