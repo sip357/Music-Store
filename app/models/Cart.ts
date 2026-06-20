@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
 export interface ICart extends Document {
+    id: string;
     userId: string | Types.ObjectId;
     items: {
         productId: string | Types.ObjectId;
@@ -12,10 +13,11 @@ export interface ICart extends Document {
 
 const cartSchema = new Schema<ICart>(
     {
-        userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+        id: { type: String, required: true, unique: true },
+        userId: { type: String, ref: "User", required: true },
         items: [
             {
-                productId: { type: Schema.Types.ObjectId, ref: "Beat", required: true },
+                productId: { type: String, ref: "Beat", required: true },
                 licenceTier: {
                     type: String,
                     enum: ["basic", "premium", "exclusive"],

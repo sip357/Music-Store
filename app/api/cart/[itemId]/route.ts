@@ -6,35 +6,24 @@ import { Types } from "mongoose";
 
 export async function PUT(
     request: Request,
-    { params }: { params: Promise<{ itemId: string }> }
+    { params }: { params: Promise<{ cartId: string }> }
 ) {
   try {
   const body = await request.json();
-  const { itemId } = await params;
+  const { cartId } = await params;
   const { items } = body;
 
   await connectDB();
-
   const user = await getUserFromToken();
-
-    if (!user) {
-      return NextResponse.json(
-        { message: "Unauthorized" },
-        { status: 401 }
-      );
-    }
-
-  const userId = user.userId;
-
-  if(!items || !Array.isArray(items)) {
+  if (!user) {
     return NextResponse.json(
-      { message: "Invalid items format" },
-      { status: 400 }
+      { message: "Unauthorized" },
+      { status: 401 }
     );
   }
 
   const updatedCart = await Cart.findOneAndUpdate(
-    { userId },
+    { cartId: cartId },
     { $set: { items } },
     { new: true }
   );

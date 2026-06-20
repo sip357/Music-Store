@@ -43,6 +43,11 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    //Get items from request body
+    const body = await request.json();
+    const { items } = body;
+
+    // Get user from token
     const user = await getUserFromToken();
 
     if (!user) {
@@ -51,6 +56,9 @@ export async function POST(request: Request) {
         { status: 401 }
       );
     }
+    console.log("Creating cart for user:", user.userId);
+    console.log("Cart items:", items);
+    console.log(JSON.stringify(items, null, 2));
 
     await connectDB();
 
@@ -65,9 +73,11 @@ export async function POST(request: Request) {
       );
     }
 
+    
+
     const newCart = new Cart({
       userId: user.userId,
-      items: []
+      items: items
     });
 
     await newCart.save();
