@@ -43,11 +43,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    //Get items from request body
+    // Get data from request body
     const body = await request.json();
+
     const { items } = body;
 
-    // Get user from token
+    // Validate request
     const user = await getUserFromToken();
 
     if (!user) {
@@ -56,40 +57,59 @@ export async function POST(request: Request) {
         { status: 401 }
       );
     }
-    console.log("Creating cart for user:", user.userId);
-    console.log("Cart items:", items);
-    console.log(JSON.stringify(items, null, 2));
 
-    await connectDB();
+    const userId = user.userId;
 
-    const existingCart = await Cart.findOne({
-      userId: user.userId
-    });
-
-    if (existingCart) {
+    if (!Array.isArray(items)) {
       return NextResponse.json(
-        { message: "Cart already exists" },
+        { message: "items must be an array" },
         { status: 400 }
       );
     }
 
-    
+    console.log("User ID:", userId);
+    console.log("Cart items:", items);
 
+    // Connect to MongoDB
+    await connectDB();
+
+    // Check if user already has a cart
+    const existingCart = await Cart.findOne({ userId });
+
+    if (existingCart) {
+      return NextResponse.json(
+        {
+          message: "Cart already exists",
+          cartId: existingCart._id,
+        },
+        { status: 409 }
+      );
+    }
+
+    // Create new cart
     const newCart = new Cart({
-      userId: user.userId,
-      items: items
+      userId,
+      items,
     });
 
+    // Save the new cart to the database
     await newCart.save();
 
     return NextResponse.json(
-      { cartId: newCart._id },
+      {
+        message: "Cart created successfully",
+        cartId: newCart._id,
+        cart: newCart,
+      },
       { status: 201 }
     );
   } catch (error) {
-    console.error(error);
+    console.error("Create cart error:", error);
+
     return NextResponse.json(
-      { error: "Failed to create cart" },
+      {
+        error: "Failed to create cart",
+      },
       { status: 500 }
     );
   }
